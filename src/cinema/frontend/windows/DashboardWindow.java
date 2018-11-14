@@ -12,14 +12,18 @@ import javax.swing.JTabbedPane;
 public class DashboardWindow extends JFrame {
     private static JTabbedPane tabbedPane;
     
+    private final static Object[] FILM_COLUMN_NAMES = new Object[]{"Title", "Sync", "Length", "Age limit"};
+    private final static Object[] SHOW_COLUMN_NAMES = new Object[]{"Datetime", "Title", "Room", "Available seat"};
+    
     public DashboardWindow() {
         initScreen();
     }
 
     private void initScreen() {
-//        setLayout(new FlowLayout());
+        setTitle("MULTIPLEX CINEMA");
+        
         tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-        JPanel filmPanel = new JPanel();
+        JPanel filmPanel = new FilmPanel();
         JPanel showPanel = new JPanel();
         
         tabbedPane.addTab("Films", filmPanel);
