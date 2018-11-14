@@ -79,7 +79,8 @@ INSERT INTO "USERNAME"."film" (title, country, syncronized, director, storyline,
 	'1');
 
 INSERT INTO "USERNAME"."room" (roomName, rowNr, columnNr) VALUES
-	('','',''),
-	('','',''),
-	('','',''),
-	('','','');
+	('Batcave','4','8'),
+	('Stargate','5','9'),
+	('Scarface','7','4'),
+	('Nautilus','7','7'),
+	('Terminator','6','8');
