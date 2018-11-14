@@ -9,15 +9,15 @@ import java.util.List;
  */
 public class GuiManager {
     private static DashboardWindow screen;
-    private static final Service sevice = new DaoService();
+//    private static final Service sevice = new DaoService();
     
     public static void start() {
-        screen. = new DashboardWindow();
+        screen = new DashboardWindow();
         screen.pack();
         screen.setVisible(true);
     }
     
-    
+ /*   
     public static List<Film> listAllFilms() {
         return null;
     }
@@ -65,4 +65,5 @@ public class GuiManager {
     public static void showBookingWindow() {
         
     }
+*/
 }

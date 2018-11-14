@@ -1,6 +1,7 @@
 package cinema;
 
 //import hu.elte.progtech2.frontend.GuiManager;
+import cinema.frontend.GuiManager;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -28,8 +29,8 @@ public class Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception{
-        initDB();
-        
+//        initDB();
+        GuiManager.start();
     }
         private static void initDB() throws Exception {
         openConnection();
