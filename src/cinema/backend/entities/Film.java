@@ -16,8 +16,7 @@ public class Film {
   private String storyline;
   private int runtime;
   private int licenseToPlay;
-  private AgeLimit ageLimit;
-  private String posterPath;
+  private String ageLimit;
 
   public long getFilmId() {
     return filmId;
@@ -83,24 +82,34 @@ public class Film {
     this.licenseToPlay = licenseToPlay;
   }
 
-  public AgeLimit getAgeLimit() {
+  public String getAgeLimit() {
     return ageLimit;
   }
 
-  public void setAgeLimit(AgeLimit ageLimit) {
+  public void setAgeLimit(String ageLimit) {
     this.ageLimit = ageLimit;
   }
 
   public String getPosterPath() {
-    return posterPath;
-  }
-
-  public void setPosterPath(String posterPath) {
-    this.posterPath = posterPath;
+    return "poster\\\\" + (createPosterName(title)) + ".jpg";
   }
   
   public Object[] toArray() {
-        String[] array = {Long.toString(filmId), title, synconized.name(), Integer.toString(runtime), ageLimit.name()};
+        String[] array = {Long.toString(filmId), title, synconized.name(), Integer.toString(runtime), ageLimit};
         return array;
+  }
+
+  private String createPosterName(String title) {
+    String lTitle = title.toLowerCase();
+    String path = "";
+    for(int ch = 0; ch< lTitle.length(); ch++) {
+      if(Character.isLetter(lTitle.charAt(ch))) {
+        path = path + lTitle.charAt(ch);
+      }
+      else {
+        path = path + "_";
+      }
+    }
+    return path;
   }
 }

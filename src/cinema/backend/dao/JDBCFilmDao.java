@@ -1,12 +1,16 @@
 package cinema.backend.dao;
 
 import cinema.backend.entities.Film;
+import cinema.backend.enums.AgeLimit;
+import cinema.backend.enums.Sync;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,7 +30,20 @@ public class JDBCFilmDao implements FilmDao {
 
   @Override
   public List<Film> findAll() {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    String sql = "SELECT * FROM \"USERNAME\".\"film\"";
+    
+    try (PreparedStatement statement = con.prepareStatement(sql);
+        ResultSet resultSet = statement.executeQuery();) {
+      List<Film> result = new LinkedList<>();
+      while (resultSet.next()) {
+        result.add(setFilm(resultSet));
+      }
+      return result;
+    }
+    catch (SQLException ex) {
+        Logger.getLogger(JDBCFilmDao.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return null;
   }
 
   @Override
@@ -42,7 +59,7 @@ public class JDBCFilmDao implements FilmDao {
       return result.get(0);
     }
     catch (SQLException ex) {
-      Logger.getLogger(JDBCOrderDao.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(JDBCFilmDao.class.getName()).log(Level.SEVERE, null, ex);
     }
   return null;
   }
@@ -51,9 +68,13 @@ public class JDBCFilmDao implements FilmDao {
         Film film = new Film();
         film.setFilmId(resultSet.getLong("filmId"));
         film.setTitle(resultSet.getString("title"));
-        film.setOrderPrice(resultSet.getBigDecimal("orderPrice"));
-        film.setStatus(OrderStatus.valueOf(resultSet.getString("status")));
-        film.setRetailerName(resultSet.getString("retailerName"));
+        film.setCounty(resultSet.getString("country"));
+        film.setSynconized(Sync.valueOf(resultSet.getString("syncronized")));
+        film.setDirector(resultSet.getString("director"));
+        film.setStoryline(resultSet.getString("storyline"));
+        film.setRuntime(resultSet.getInt("runtime"));
+        film.setLicenseToPlay(resultSet.getInt("licenseToPlay"));
+        film.setAgeLimit(AgeLimit.getAgeLimit(resultSet.getString("ageLimit")));
         return film;
 }
   

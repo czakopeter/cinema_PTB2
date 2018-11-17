@@ -1,5 +1,7 @@
 package cinema.frontend.windows.components;
 
+import cinema.backend.entities.Film;
+import cinema.frontend.GuiManager;
 import java.awt.FlowLayout;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -37,15 +39,18 @@ public class FilmDetailsPanel extends JPanel {
   }
 
   void setFilm(String filmId) {
-//      Film film = GuiManager.getFilm(filmId);
+    Film film = GuiManager.getFilm(filmId);
+    System.out.println(film.getPosterPath());
     BufferedImage poster = null;
     try{
-      poster = ImageIO.read(new File("poster//oldboy.jpg"));
+      poster = ImageIO.read(new File(film.getPosterPath()));
     }
-    catch(IOException ex) {}
+    catch(IOException ex) {System.err.println("prob");}
+
     if(poster != null) {
-      this.remove(poster_frame);
+//      this.remove(poster_frame);
       this.add(poster_frame = new JLabel(new ImageIcon(poster)));
     }
+
   }
 }

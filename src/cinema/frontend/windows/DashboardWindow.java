@@ -1,5 +1,6 @@
 package cinema.frontend.windows;
 
+import cinema.frontend.GuiManager;
 import cinema.frontend.windows.components.FilmPanel;
 import cinema.frontend.windows.components.NewShowPanel;
 import java.awt.FlowLayout;

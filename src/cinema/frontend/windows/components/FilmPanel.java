@@ -1,6 +1,7 @@
 package cinema.frontend.windows.components;
 
 import cinema.backend.entities.Film;
+import cinema.frontend.GuiManager;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -31,10 +32,10 @@ public class FilmPanel extends JPanel {
   }
 
   private void initFilmTable() {
-
-    filmTable = new JTable(5, 5);
+    filmTable = new JTable(1, 1);
     filmTable.getSelectionModel().addListSelectionListener(this::newSelection);
     this.add(new JScrollPane(filmTable));
+    addContentToTable(GuiManager.listAllFilms());
   }
   
   public void addContentToTable(List<Film> content) {
@@ -45,7 +46,7 @@ public class FilmPanel extends JPanel {
   }
 
   private void newSelection(ListSelectionEvent event) {
-    detailsPanel.setFilm("filmId");
+    detailsPanel.setFilm((String)filmTable.getValueAt(filmTable.getSelectedRow(), 0));
     //save the selected film ID
   }
 }
