@@ -17,7 +17,6 @@ public class DashboardWindow extends JFrame {
     public static final int SHOW_TAB = 1;
     public static final int NEW_SHOW_TAB = 2;
     
-    private final static Object[] FILM_COLUMN_NAMES = new Object[]{"Title", "Sync", "Length", "Age limit"};
     private final static Object[] SHOW_COLUMN_NAMES = new Object[]{"Datetime", "Title", "Room", "Available seat"};
     
     public DashboardWindow() {
@@ -26,9 +25,10 @@ public class DashboardWindow extends JFrame {
 
     private void initScreen() {
         setTitle("MULTIPLEX CINEMA");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-        JPanel filmListPanel = new FilmPanel(this);
+        JPanel filmListPanel = new FilmPanel();
         JPanel showListPanel = new JPanel();
         JPanel newShowPanel = new NewShowPanel();
         
@@ -36,11 +36,5 @@ public class DashboardWindow extends JFrame {
         tabbedPane.addTab("Show list", showListPanel);
         tabbedPane.addTab("New show", newShowPanel);
         add(tabbedPane);
-        
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-    
-    public void jumpNewShowPanelWithFilmTitle(String title) {
-        tabbedPane.setSelectedIndex(NEW_SHOW_TAB);
     }
 }

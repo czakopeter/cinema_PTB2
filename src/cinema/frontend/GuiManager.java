@@ -17,13 +17,17 @@ public class GuiManager {
         screen.setVisible(true);
     }
     
- /*   
+ /* 
+    public static Film getFilm(String filmId) {
+      return null;
+    }
+    
     public static List<Film> listAllFilms() {
-        return null;
+      return null;
     }
     
     public static List<Show> listAllShows() {
-        return null;
+      return null;
     }
     
     public static void addNewShow(String filmId, String datetime, String roomName) {
@@ -34,12 +38,12 @@ public class GuiManager {
         
     }
     
-    public static void filterShowByRoom(String roomName) {
-        
+    public static List<Show> filterShowByRoom(String roomName) {
+      return null;
     }
     
-    public static void filterShowByFilm(String filmId) {
-        
+    public static List<Show> filterShowByFilm(String filmId) {
+      return null;
     }
     
     public static int getSoldTicketsForFilm(String filmId) {
@@ -51,14 +55,6 @@ public class GuiManager {
     }
     
     public static void modifyBooking(List<Seat>) {
-        
-    }
-    
-    public static void showFilmWindow() {
-        
-    }
-    
-    public static void showShowWindow() {
         
     }
     

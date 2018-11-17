@@ -18,7 +18,7 @@ public class Application {
 
     private static Connection con;
     
-    private static final String URL = "jdbc:derby:progtech2;create=true";
+    private static final String URL = "jdbc:derby:cinemaDB;create=true";
     private static final String USER = "username";
     private static final String PASSWORD = "password";
     
