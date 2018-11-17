@@ -3,6 +3,7 @@ package cinema.frontend.windows.components;
 import cinema.backend.entities.Film;
 import cinema.frontend.GuiManager;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -26,6 +27,7 @@ public class FilmDetailsPanel extends JPanel {
 
   private void initFilmDetailsPanel() {
     setLayout(new FlowLayout(FlowLayout.LEADING));
+    setPreferredSize(new Dimension(182, 268));
     setToEmpty();
     add(poster_frame);
     add(dataPanel);
@@ -43,9 +45,13 @@ public class FilmDetailsPanel extends JPanel {
     try{
       poster = ImageIO.read(new File(film.getPosterPath()));
     }
-    catch(IOException ex) {System.err.println("prob");}
+    catch(IOException ex) {
+      poster_frame.setIcon(null);
+      poster_frame.setText("NO POSTER");
+    }
 
     if(poster != null) {
+      poster_frame.setText(null);
       poster_frame.setIcon(new ImageIcon(poster));
     }
   }
