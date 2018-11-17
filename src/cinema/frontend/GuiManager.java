@@ -1,5 +1,8 @@
 package cinema.frontend;
 
+import cinema.backend.entities.Film;
+import cinema.backend.service.DaoService;
+import cinema.backend.service.Service;
 import cinema.frontend.windows.DashboardWindow;
 import java.util.List;
 
@@ -9,7 +12,7 @@ import java.util.List;
  */
 public class GuiManager {
     private static DashboardWindow screen;
-//    private static final Service sevice = new DaoService();
+    private static final Service service = new DaoService();
     
     public static void start() {
         screen = new DashboardWindow();
@@ -17,15 +20,15 @@ public class GuiManager {
         screen.setVisible(true);
     }
     
- /* 
+  
     public static Film getFilm(String filmId) {
-      return null;
+      return service.getFilm(Long.valueOf(filmId));
     }
     
     public static List<Film> listAllFilms() {
-      return null;
+      return service.listAllFilms();
     }
-    
+/*    
     public static List<Show> listAllShows() {
       return null;
     }

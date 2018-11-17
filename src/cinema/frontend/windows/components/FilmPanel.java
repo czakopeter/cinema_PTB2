@@ -34,13 +34,14 @@ public class FilmPanel extends JPanel {
 
     filmTable = new JTable(5, 5);
     filmTable.getSelectionModel().addListSelectionListener(this::newSelection);
-    DefaultTableModel dtm = new DefaultTableModel(FILM_COLUMN_NAMES, 0);
-    
     this.add(new JScrollPane(filmTable));
   }
   
   public void addContentToTable(List<Film> content) {
-    
+    filmTable.removeAll();
+    DefaultTableModel dtm = new DefaultTableModel(FILM_COLUMN_NAMES, 0);
+    content.forEach(row -> dtm.addRow(row.toArray()));
+    filmTable.setModel(dtm);
   }
 
   private void newSelection(ListSelectionEvent event) {
