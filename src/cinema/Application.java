@@ -29,8 +29,8 @@ public class Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception{
-//        initDB();
-          GuiManager.start();
+//      initDB();
+      GuiManager.start();
     }
         private static void initDB() throws Exception {
         openConnection();
@@ -69,7 +69,6 @@ public class Application {
                 if (line.contains(";")) {
                     line = line.replace(";", "");
                 }
-                System.out.println(line);
                 st.execute(line);
             }
         }

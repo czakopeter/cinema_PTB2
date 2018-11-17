@@ -46,7 +46,8 @@ public class FilmPanel extends JPanel {
   }
 
   private void newSelection(ListSelectionEvent event) {
-    detailsPanel.setFilm((String)filmTable.getValueAt(filmTable.getSelectedRow(), 0));
-    //save the selected film ID
+    if(event.getValueIsAdjusting()) {
+      detailsPanel.setFilm((String)filmTable.getValueAt(filmTable.getSelectedRow(), 0));
+    }
   }
 }
