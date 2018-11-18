@@ -25,7 +25,8 @@ CREATE TABLE "USERNAME"."seat"(
 	showId BIGINT NOT NULL REFERENCES "USERNAME"."show"(showId),
 	roomName VARCHAR(30) NOT NULL REFERENCES "USERNAME"."room"(roomName),
 	rowIdx INT NOT NULL,
-	columnIdx INT NOT NULL
+	columnIdx INT NOT NULL,
+	status VARCHAR(1) NOT NULL
 );
 
 INSERT INTO "USERNAME"."film" (title, country, syncronized, director, storyline, runtime, licenseToPlay, ageLimit) VALUES

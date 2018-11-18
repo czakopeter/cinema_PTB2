@@ -16,7 +16,7 @@ public class Film {
   private String storyline;
   private int runtime;
   private int licenseToPlay;
-  private String ageLimit;
+  private AgeLimit ageLimit;
 
   public long getFilmId() {
     return filmId;
@@ -82,11 +82,11 @@ public class Film {
     this.licenseToPlay = licenseToPlay;
   }
 
-  public String getAgeLimit() {
+  public AgeLimit getAgeLimit() {
     return ageLimit;
   }
 
-  public void setAgeLimit(String ageLimit) {
+  public void setAgeLimit(AgeLimit ageLimit) {
     this.ageLimit = ageLimit;
   }
 
@@ -103,7 +103,7 @@ public class Film {
                           storyline,
                           Integer.toString(runtime),
                           Integer.toString(licenseToPlay),
-                          ageLimit};
+                          ageLimit.name()};
         return array;
   }
 

@@ -74,7 +74,7 @@ public class JDBCFilmDao implements FilmDao {
         film.setStoryline(resultSet.getString("storyline"));
         film.setRuntime(resultSet.getInt("runtime"));
         film.setLicenseToPlay(resultSet.getInt("licenseToPlay"));
-        film.setAgeLimit(AgeLimit.getAgeLimit(resultSet.getString("ageLimit")));
+        film.setAgeLimit(AgeLimit.values()[Integer.valueOf(resultSet.getString("ageLimit"))]);
         return film;
 }
   
