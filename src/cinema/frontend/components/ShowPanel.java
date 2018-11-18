@@ -1,9 +1,9 @@
 package cinema.frontend.components;
 
+import cinema.frontend.GuiManager;
 import cinema.frontend.components.factory.SwingComponentFactory;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -36,8 +36,10 @@ public class ShowPanel extends JPanel{
 
   private void initFilterPanel() {
     JPanel filterPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
-    resetFilterButton = new JButton("Filter reset");
+    
     filmComboBox = SwingComponentFactory.createComboBox(filterPanel, "Film filter");
+    GuiManager.listAllFilms().forEach(film -> filmComboBox.addItem(film.getTitle()));
+    
     roomComboBox = SwingComponentFactory.createComboBox(filterPanel, "Room filter");
     resetFilterButton = SwingComponentFactory.createButton(filterPanel, "Reset filter");
     add(filterPanel,BorderLayout.NORTH);

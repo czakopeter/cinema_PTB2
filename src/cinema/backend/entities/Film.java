@@ -95,9 +95,24 @@ public class Film {
   }
   
   public Object[] toArray() {
-        String[] array = {Long.toString(filmId), title, synconized.name(), Integer.toString(runtime), ageLimit};
+        String[] array = {Long.toString(filmId),
+                          title,
+                          county,
+                          synconized.name(),
+                          director,
+                          storyline,
+                          Integer.toString(runtime),
+                          Integer.toString(licenseToPlay),
+                          ageLimit};
         return array;
   }
+
+    @Override
+    public String toString() {
+        return "Film{" + "filmId=" + filmId + ", title=" + title + ", county=" + county + ", synconized=" + synconized + ", director=" + director + ", storyline=" + storyline + ", runtime=" + runtime + ", licenseToPlay=" + licenseToPlay + ", ageLimit=" + ageLimit + '}';
+    }
+  
+  
 
   private String createPosterName(String title) {
     String lTitle = title.toLowerCase();

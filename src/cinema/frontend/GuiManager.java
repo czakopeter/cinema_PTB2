@@ -28,6 +28,7 @@ public class GuiManager {
     public static List<Film> listAllFilms() {
       return service.listAllFilms();
     }
+    
 /*    
     public static List<Show> listAllShows() {
       return null;

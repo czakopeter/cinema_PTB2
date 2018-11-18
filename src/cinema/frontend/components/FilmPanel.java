@@ -46,9 +46,19 @@ public class FilmPanel extends JPanel {
   public void addContentToTable(List<Film> content) {
     filmTable.removeAll();
     DefaultTableModel dtm = new DefaultTableModel(FILM_COLUMN_NAMES, 0);
-    content.forEach(row -> dtm.addRow(row.toArray()));
+    content.forEach(row -> dtm.addRow(displayedFilmData(row)));
     filmTable.setModel(dtm);
   }
+  
+  private Object[] displayedFilmData(Film film) {
+      Object[] array = {Long.toString(film.getFilmId()),
+                        film.getTitle(),
+                        film.getSynconized().name(),
+                        Integer.toString(film.getRuntime()),
+                        film.getAgeLimit()};
+      return array;
+  }
+  
 
   private void newSelection(ListSelectionEvent event) {
     if(event.getValueIsAdjusting()) {

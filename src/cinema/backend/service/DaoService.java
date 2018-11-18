@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author CzPet
  */
-public class DaoService implements Service{
+public class DaoService implements Service {
   
   private DaoManager dm = new DaoManager();
 
@@ -21,5 +21,4 @@ public class DaoService implements Service{
   public Film getFilm(Long filmId) {
     return dm.getFilm(filmId);
   }
-  
 }
