@@ -35,9 +35,8 @@ public class ShowPanel extends JPanel{
   }
 
   private void initShowPanel() {
-    String[] film = {"film1", "film2"};
-    String[] room = {"room1", "room2"};
     this.setLayout(new BorderLayout());
+    
     initFilterPanel();
     initShowTable();
     initButtonsPanel();
@@ -50,6 +49,7 @@ public class ShowPanel extends JPanel{
     GuiManager.listAllFilms().forEach(film -> filmComboBox.addItem(film.getTitle()));
     
     roomComboBox = SwingComponentFactory.createComboBox(filterPanel, "Room filter");
+    GuiManager.listAllRooms().forEach(room -> roomComboBox.addItem(room.getRoomName()));
     
     resetFilterButton = SwingComponentFactory.createButton(filterPanel, "Reset filter");
     resetFilterButton.addActionListener(this::resetFilter);

@@ -1,6 +1,7 @@
 package cinema.frontend;
 
 import cinema.backend.entities.Film;
+import cinema.backend.entities.Room;
 import cinema.backend.entities.Show;
 import cinema.backend.service.DaoService;
 import cinema.backend.service.Service;
@@ -32,6 +33,10 @@ public class GuiManager {
         
     public static List<Show> listAllShows() {
       return service.listAllShows();
+    }
+    
+    public static List<Room> listAllRooms() {
+      return service.listAllRooms();
     }
     
     public static void addNewShow(String filmId, String datetime, String roomName) {

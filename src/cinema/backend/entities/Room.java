@@ -9,11 +9,11 @@ public class Room {
     private int rowNr;
     private int columnNr;
 
-    public String getNameRoom() {
+    public String getRoomName() {
         return roomName;
     }
 
-    public void setNameRoom(String roomName) {
+    public void setRoomName(String roomName) {
         this.roomName = roomName;
     }
 

@@ -30,7 +30,7 @@ public class JDBCFilmDao implements FilmDao {
 
   @Override
   public List<Film> findAll() {
-    String sql = "SELECT * FROM \"USERNAME\".\"film\"";
+      String sql = "SELECT * FROM \"USERNAME\".\"film\"";
     
     try (PreparedStatement statement = con.prepareStatement(sql);
         ResultSet resultSet = statement.executeQuery();) {

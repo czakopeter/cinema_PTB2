@@ -1,6 +1,7 @@
 package cinema.backend.service;
 
 import cinema.backend.entities.Film;
+import cinema.backend.entities.Room;
 import cinema.backend.entities.Show;
 import java.util.List;
 
@@ -15,5 +16,7 @@ public interface Service {
   public List<Film> listAllFilms();
 
   public Film getFilm(Long filmId);
+
+  public List<Room> listAllRooms();
   
 }

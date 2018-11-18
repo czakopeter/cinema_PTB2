@@ -1,6 +1,8 @@
 package cinema.backend.dao;
 
 import cinema.backend.entities.Film;
+import cinema.backend.entities.Room;
+import cinema.backend.entities.Seat;
 import cinema.backend.entities.Show;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,10 +24,15 @@ public class DaoManager {
   
   private FilmDao filmDao;
   private ShowDao showDao;
+  private RoomDao roomDao;
+  private SeatDao seatDao;
 
   public DaoManager() {
     this.filmDao = new JDBCFilmDao(con);
     this.showDao = new JDBCShowDao(con);
+    this.roomDao = new JDBCRoomDao(con);
+    this.seatDao = new JDBCSeatDao(con);
+    
   }
 
   public List<Film> listAllFilms() {
@@ -50,6 +57,30 @@ public class DaoManager {
       List<Show> shows = showDao.findAll();
       close();
       return shows;
+  }
+  
+  public List<Room> listAllRooms() {
+      open();
+      roomDao.setCon(con);
+      List<Room> rooms = roomDao.findAll();
+      close();
+      return rooms;
+  }
+  
+  public Room getRoom(String roomName) {
+    open();
+    roomDao.setCon(con);
+    Room room = roomDao.findById(roomName);
+    close();
+    return room;
+  }
+  
+  public List<Seat> getSeatsByShowId(long showId) {
+    open();
+    seatDao.setCon(con);
+    List<Seat> seats = seatDao.findByShowId(showId);
+    close();
+    return seats;
   }
   
   private void open() {
