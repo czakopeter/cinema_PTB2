@@ -2,6 +2,7 @@ package cinema.frontend.components;
 
 import cinema.backend.entities.Film;
 import cinema.frontend.GuiManager;
+import java.awt.BorderLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -10,9 +11,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
 
 /**
  *
@@ -29,10 +27,9 @@ public class FilmPanel extends JPanel {
   }
 
   private void initFilmPanel() {
-    this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+    this.setLayout(new BorderLayout());
     initFilmTable();
-    detailsPanel = new FilmDetailsPanel();
-    this.add(detailsPanel); 
+    initDetailsPanel();
   }
   
   private void initFilmTable() {
@@ -42,7 +39,7 @@ public class FilmPanel extends JPanel {
     filmTable.getSelectionModel().addListSelectionListener(this::newSelection);
     
     filmTable.setFillsViewportHeight(true);
-    this.add(new JScrollPane(filmTable));
+    this.add(new JScrollPane(filmTable),BorderLayout.CENTER);
     addContentToTable(GuiManager.listAllFilms());
   }
   
@@ -57,5 +54,10 @@ public class FilmPanel extends JPanel {
     if(event.getValueIsAdjusting()) {
       detailsPanel.setFilm((String)filmTable.getValueAt(filmTable.getSelectedRow(), 0));
     }
+  }
+  
+  private void initDetailsPanel() {
+    detailsPanel = new FilmDetailsPanel();
+    add(detailsPanel, BorderLayout.SOUTH); 
   }
 }
