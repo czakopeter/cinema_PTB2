@@ -3,6 +3,7 @@ package cinema.frontend.components;
 import cinema.backend.entities.Show;
 import cinema.frontend.GuiManager;
 import cinema.frontend.components.factory.SwingComponentFactory;
+import cinema.frontend.windows.DashboardWindow;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -14,7 +15,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,11 +24,13 @@ import javax.swing.table.DefaultTableModel;
 public class ShowPanel extends JPanel{
   private final static Object[] SHOW_COLUMN_NAMES = new Object[]{"ID","Datetime", "Title", "Room", "Available seat"};
   
+  private DashboardWindow screen;
   private JTable showTable;
   private JButton newShowButton, modifyShowButton, deleteShowButton, resetFilterButton;
   private JComboBox filmComboBox, roomComboBox;
 
-  public ShowPanel() {
+  public ShowPanel(DashboardWindow s) {
+    this.screen = s;
     initShowPanel();
   }
 
@@ -38,7 +40,7 @@ public class ShowPanel extends JPanel{
     this.setLayout(new BorderLayout());
     initFilterPanel();
     initShowTable();
-    initShowButtonsPanel();
+    initButtonsPanel();
    }
 
   private void initFilterPanel() {
@@ -88,7 +90,7 @@ public class ShowPanel extends JPanel{
     return array;
   }
 
-  private void initShowButtonsPanel() {
+  private void initButtonsPanel() {
     JPanel showButtonsPanel = new JPanel(new FlowLayout(FlowLayout.TRAILING));
     newShowButton = SwingComponentFactory.createButton(showButtonsPanel, "New show");
     newShowButton.addActionListener(this::addNewShow);

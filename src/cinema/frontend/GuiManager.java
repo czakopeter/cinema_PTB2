@@ -33,11 +33,11 @@ public class GuiManager {
     public static List<Show> listAllShows() {
       return service.listAllShows();
     }
-/*    
-    public static void addNewShow(String filmId, String datetime, String roomName) {
-        
-    }
     
+    public static void addNewShow(String filmId, String datetime, String roomName) {
+      
+    }
+/*    
     public static void deleteShow(String showId) {
         
     }
