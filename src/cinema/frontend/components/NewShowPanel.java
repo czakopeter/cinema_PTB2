@@ -1,4 +1,4 @@
-package cinema.frontend.windows.components;
+package cinema.frontend.components;
 
 import javax.swing.JPanel;
 

@@ -1,4 +1,4 @@
-package cinema.frontend.windows.components;
+package cinema.frontend.components;
 
 import cinema.backend.entities.Film;
 import cinema.frontend.GuiManager;

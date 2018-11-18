@@ -1,4 +1,4 @@
-package cinema.frontend.windows.components;
+package cinema.frontend.components;
 
 import cinema.backend.entities.Film;
 import cinema.frontend.GuiManager;
@@ -9,6 +9,10 @@ import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -30,10 +34,14 @@ public class FilmPanel extends JPanel {
     detailsPanel = new FilmDetailsPanel();
     this.add(detailsPanel); 
   }
-
+  
   private void initFilmTable() {
     filmTable = new JTable(1, 1);
+    filmTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    filmTable.setRowSelectionAllowed(true);
     filmTable.getSelectionModel().addListSelectionListener(this::newSelection);
+    
+    filmTable.setFillsViewportHeight(true);
     this.add(new JScrollPane(filmTable));
     addContentToTable(GuiManager.listAllFilms());
   }
