@@ -1,15 +1,18 @@
 package cinema.frontend.components;
 
 import cinema.frontend.components.factory.SwingComponentFactory;
+import cinema.frontend.windows.DashboardWindow;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.SpringLayout;
 
 /**
@@ -17,16 +20,20 @@ import javax.swing.SpringLayout;
  * @author CzP
  */
 public class NewShowPanel extends JPanel{
+  
+  private JTabbedPane tabbedPanel;
+  
   private JComboBox filmComboBox, roomComboBox;
-  private JButton addNewShowButton, cancelAddButton;
+  private JButton addNewShowButton, cancelButton;
 
-  public NewShowPanel() {
+  public NewShowPanel(JTabbedPane tp) {
+    tabbedPanel = tp;
     initNewShowPanel();
   }
   
   private void initNewShowPanel() {
     setLayout(new BorderLayout());
-    setPreferredSize(new Dimension(453, 691));
+
     initInputPanel();
     initButtonsPanel();
   }
@@ -44,8 +51,21 @@ public class NewShowPanel extends JPanel{
   private void initButtonsPanel() {
     JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
     addNewShowButton = SwingComponentFactory.createButton(buttonsPanel, "Add show");
-    cancelAddButton = SwingComponentFactory.createButton(buttonsPanel, "Cancel");
+    addNewShowButton.addActionListener(this::addShow);
+    
+    cancelButton = SwingComponentFactory.createButton(buttonsPanel, "Cancel");
+    cancelButton.addActionListener(this::cancel);
     
     add(buttonsPanel, BorderLayout.SOUTH);
+  }
+  
+  private void addShow(ActionEvent event) {
+    
+  }
+  
+  private void cancel(ActionEvent event) {
+    tabbedPanel.remove(this);
+    tabbedPanel.setSelectedIndex(tabbedPanel.getTabCount()-1);
+    tabbedPanel.setEnabled(true);
   }
 }

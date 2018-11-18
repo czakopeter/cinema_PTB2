@@ -107,7 +107,7 @@ public class ShowPanel extends JPanel{
   }
   
   private void addNewShow(ActionEvent event) {
-    
+    screen.addNewShowPanelToTabbedPanel();
   }
   
   private void modifyShow(ActionEvent event) {

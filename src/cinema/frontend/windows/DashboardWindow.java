@@ -14,7 +14,6 @@ import javax.swing.JTabbedPane;
  */
 public class DashboardWindow extends JFrame {
     private static JTabbedPane tabbedPane;
-    private static JPanel addNewShowPanel;
     
     public DashboardWindow() {
         initScreen();
@@ -25,7 +24,6 @@ public class DashboardWindow extends JFrame {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     initTabbedPanel();
-    initAddNewShowPanel();
     
     add(tabbedPane);
   }
@@ -39,7 +37,10 @@ public class DashboardWindow extends JFrame {
     tabbedPane.addTab("Show list", showListPanel);
   }
 
-  private void initAddNewShowPanel() {
-    addNewShowPanel = new NewShowPanel();
+  public void addNewShowPanelToTabbedPanel() {
+    NewShowPanel nsp = new NewShowPanel(tabbedPane);
+    tabbedPane.addTab("add show", nsp);
+    tabbedPane.setEnabled(false);
+    tabbedPane.setSelectedIndex(2);
   }
 }
