@@ -117,3 +117,9 @@ INSERT INTO "USERNAME"."room" (roomName, rowNr, columnNr) VALUES
 	('Scarface',7,4),
 	('Nautilus',7,7),
 	('Terminator',6,8);
+
+INSERT INTO "USERNAME"."show" (filmId, roomName, startAtDatetime) VALUES
+	(1,
+	'Batcave',
+	'2018-11-12'
+	);

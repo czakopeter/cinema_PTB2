@@ -1,6 +1,7 @@
 package cinema.backend.dao;
 
 import cinema.backend.entities.Film;
+import cinema.backend.entities.Show;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -20,9 +21,11 @@ public class DaoManager {
   private Connection con;
   
   private FilmDao filmDao;
+  private ShowDao showDao;
 
   public DaoManager() {
     this.filmDao = new JDBCFilmDao(con);
+    this.showDao = new JDBCShowDao(con);
   }
 
   public List<Film> listAllFilms() {
@@ -39,6 +42,14 @@ public class DaoManager {
     Film film = filmDao.findById(filmId);
     close();
     return film;
+  }
+  
+  public List<Show> listAllShows() {
+      open();
+      showDao.setCon(con);
+      List<Show> shows = showDao.findAll();
+      close();
+      return shows;
   }
   
   private void open() {

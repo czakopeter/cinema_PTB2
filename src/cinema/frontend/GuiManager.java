@@ -1,6 +1,7 @@
 package cinema.frontend;
 
 import cinema.backend.entities.Film;
+import cinema.backend.entities.Show;
 import cinema.backend.service.DaoService;
 import cinema.backend.service.Service;
 import cinema.frontend.windows.DashboardWindow;
@@ -28,12 +29,11 @@ public class GuiManager {
     public static List<Film> listAllFilms() {
       return service.listAllFilms();
     }
-    
-/*    
+        
     public static List<Show> listAllShows() {
-      return null;
+      return service.listAllShows();
     }
-    
+/*    
     public static void addNewShow(String filmId, String datetime, String roomName) {
         
     }
