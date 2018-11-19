@@ -49,6 +49,7 @@ public class BookingPanel extends JPanel {
   private void saveChanges(ActionEvent event) {
     
   }
+  
   private void dropChanges(ActionEvent event) {
     
   }
