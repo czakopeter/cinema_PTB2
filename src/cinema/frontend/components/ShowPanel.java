@@ -46,7 +46,8 @@ public class ShowPanel extends JPanel{
     JPanel filterPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
     
     filmComboBox = SwingComponentFactory.createComboBox(filterPanel, "Film filter");
-    GuiManager.listAllFilms().forEach(film -> filmComboBox.addItem(film.getTitle()));
+    GuiManager.listAllFilms().forEach(film -> filmComboBox.addItem(film.getTitle() + " (" + film.getFilmId() + ")"));
+    filmComboBox.addActionListener(this::filmFilterSelect);
     
     roomComboBox = SwingComponentFactory.createComboBox(filterPanel, "Room filter");
     GuiManager.listAllRooms().forEach(room -> roomComboBox.addItem(room.getRoomName()));
@@ -116,6 +117,16 @@ public class ShowPanel extends JPanel{
   
   private void deleteShow(ActionEvent event) {
     
+  }
+  
+  private void filmFilterSelect(ActionEvent event) {
+    if(filmComboBox.getSelectedIndex() != 0) {
+      String line = filmComboBox.getSelectedItem().toString();
+      addContentToTable(GuiManager.listShowsByFilmId(line.substring(line.lastIndexOf('(')+1, line.length()-1)));
+    }
+    else {
+      addContentToTable(GuiManager.listAllShows());
+    }
   }
   
   private void resetFilter(ActionEvent event) {

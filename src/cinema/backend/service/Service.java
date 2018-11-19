@@ -18,5 +18,7 @@ public interface Service {
   public Film getFilm(Long filmId);
 
   public List<Room> listAllRooms();
+
+  public List<Show> listShowsByFilmId(Long filmid);
   
 }

@@ -33,4 +33,9 @@ public class DaoService implements Service {
   public List<Room> listAllRooms() {
     return dm.listAllRooms();
   }
+
+  @Override
+  public List<Show> listShowsByFilmId(Long filmId) {
+    return dm.listShowsByFilmId(filmId);
+  }
 }

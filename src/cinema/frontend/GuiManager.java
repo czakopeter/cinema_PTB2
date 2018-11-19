@@ -42,16 +42,17 @@ public class GuiManager {
     public static void addNewShow(String filmId, String datetime, String roomName) {
       
     }
+    
+    public static List<Show> listShowsByFilmId(String filmId) {
+      return service.listShowsByFilmId(Long.valueOf(filmId));
+    }
+    
 /*    
     public static void deleteShow(String showId) {
         
     }
     
     public static List<Show> filterShowByRoom(String roomName) {
-      return null;
-    }
-    
-    public static List<Show> filterShowByFilm(String filmId) {
       return null;
     }
     

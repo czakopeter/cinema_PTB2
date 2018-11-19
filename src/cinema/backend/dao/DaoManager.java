@@ -75,12 +75,20 @@ public class DaoManager {
     return room;
   }
   
-  public List<Seat> getSeatsByShowId(long showId) {
+  public List<Seat> listSeatsByShowId(long showId) {
     open();
     seatDao.setCon(con);
     List<Seat> seats = seatDao.findByShowId(showId);
     close();
     return seats;
+  }
+  
+  public List<Show> listShowsByFilmId(Long filmId) {
+    open();
+    showDao.setCon(con);
+    List<Show> shows = showDao.findShowsByFilmId(filmId);
+    close();
+    return shows;
   }
   
   private void open() {

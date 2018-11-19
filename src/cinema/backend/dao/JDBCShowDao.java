@@ -78,4 +78,22 @@ public class JDBCShowDao implements ShowDao {
 
   return statement;
   }
+
+  @Override
+  public List<Show> findShowsByFilmId(Long filmId) {
+    String sql = "SELECT * FROM \"USERNAME\".\"show\" WHERE filmId = ?";
+        try (PreparedStatement statement = createPreparedStatement(con, sql, filmId);
+        ResultSet resultSet = statement.executeQuery();) {
+
+        List<Show> result = new LinkedList<>();
+        while (resultSet.next()) {
+            result.add(setShow(resultSet));
+        }
+        return result;
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(JDBCShowDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+  }
 }
