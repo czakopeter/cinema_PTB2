@@ -21,13 +21,13 @@ import javax.swing.SpringLayout;
  */
 public class NewShowPanel extends JPanel{
   
-  private JTabbedPane tabbedPanel;
+  private JTabbedPane tabbedPane;
   
   private JComboBox filmComboBox, roomComboBox;
   private JButton addNewShowButton, cancelButton;
 
   public NewShowPanel(JTabbedPane tp) {
-    tabbedPanel = tp;
+    tabbedPane = tp;
     initNewShowPanel();
   }
   
@@ -64,8 +64,8 @@ public class NewShowPanel extends JPanel{
   }
   
   private void cancel(ActionEvent event) {
-    tabbedPanel.remove(this);
-    tabbedPanel.setSelectedIndex(tabbedPanel.getTabCount()-1);
-    tabbedPanel.setEnabled(true);
+    tabbedPane.remove(this);
+    tabbedPane.setSelectedIndex(tabbedPane.getTabCount()-1);
+    tabbedPane.setEnabled(true);
   }
 }

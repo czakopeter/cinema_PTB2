@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Mon Nov 19 14:14:12 CET 2018:
- Derby The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631) változat betöltése: a816c00e-0167-2c1b-6686-000000c30b58 példány
-a(z) C:\Users\CzPet\Desktop\Elte\201819_1\ProgTech2\cinema_PTB2\cinemaDB adatbázis-könyvtáron: sun.misc.Launcher$AppClassLoader@10455d6 
+Mon Nov 19 18:00:48 CET 2018:
+ Derby The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446) változat betöltése: a816c00e-0167-2cea-dbdc-000002dcf9f8 példány
+a(z) C:\Users\CzP\Documents\NetBeansProjects\Application\cinemaDB adatbázis-könyvtáron: sun.misc.Launcher$AppClassLoader@610455d6 
 
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_112-b15
-user.dir=C:\Users\CzPet\Desktop\Elte\201819_1\ProgTech2\cinema_PTB2
+java.runtime.version=1.8.0_181-b13
+user.dir=C:\Users\CzP\Documents\NetBeansProjects\Application
 os.name=Windows 10
-os.arch=x86
+os.arch=amd64
 os.version=10.0
 derby.system.home=null
 Az adatbázis-osztálybetöltő elindult - derby.database.classpath=''

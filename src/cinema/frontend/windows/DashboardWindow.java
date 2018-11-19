@@ -43,4 +43,8 @@ public class DashboardWindow extends JFrame {
     tabbedPane.setEnabled(false);
     tabbedPane.setSelectedIndex(2);
   }
+
+  public void addBookingPanelToTabbedPanel() {
+    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  }
 }

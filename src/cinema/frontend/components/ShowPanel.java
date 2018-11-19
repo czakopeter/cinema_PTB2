@@ -26,7 +26,7 @@ public class ShowPanel extends JPanel{
   
   private DashboardWindow screen;
   private JTable showTable;
-  private JButton newShowButton, modifyShowButton, deleteShowButton, resetFilterButton;
+  private JButton newShowButton, modifyShowButton, deleteShowButton, resetFilterButton, bookButton;
   private JComboBox filmComboBox, roomComboBox;
 
   public ShowPanel(DashboardWindow s) {
@@ -94,6 +94,10 @@ public class ShowPanel extends JPanel{
 
   private void initButtonsPanel() {
     JPanel showButtonsPanel = new JPanel(new FlowLayout(FlowLayout.TRAILING));
+    
+    bookButton = SwingComponentFactory.createButton(showButtonsPanel, "Book");
+    bookButton.addActionListener(this::booking);
+    
     newShowButton = SwingComponentFactory.createButton(showButtonsPanel, "New show");
     newShowButton.addActionListener(this::addNewShow);
     
@@ -106,6 +110,10 @@ public class ShowPanel extends JPanel{
     deleteShowButton.setEnabled(false);
     
     add(showButtonsPanel, BorderLayout.SOUTH);
+  }
+  
+  private void booking(ActionEvent event) {
+    screen.addBookingPanelToTabbedPanel();
   }
   
   private void addNewShow(ActionEvent event) {
