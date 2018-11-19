@@ -10,4 +10,6 @@ import java.util.List;
 public interface ShowDao extends CRUDDao<Show, Long>{
 
   public List<Show> findShowsByFilmId(Long filmId);
+
+  public List<Show> listShowsByRoom(String roomName);
 }

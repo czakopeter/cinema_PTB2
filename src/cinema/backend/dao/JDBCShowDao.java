@@ -78,11 +78,37 @@ public class JDBCShowDao implements ShowDao {
 
   return statement;
   }
+  
+  private PreparedStatement createPreparedStatement(Connection con, String sql, String key) throws SQLException {
+  PreparedStatement statement = con.prepareStatement(sql);
+
+  statement.setString(1, key);
+
+  return statement;
+  }
 
   @Override
   public List<Show> findShowsByFilmId(Long filmId) {
     String sql = "SELECT * FROM \"USERNAME\".\"show\" WHERE filmId = ?";
         try (PreparedStatement statement = createPreparedStatement(con, sql, filmId);
+        ResultSet resultSet = statement.executeQuery();) {
+
+        List<Show> result = new LinkedList<>();
+        while (resultSet.next()) {
+            result.add(setShow(resultSet));
+        }
+        return result;
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(JDBCShowDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+  }
+
+  @Override
+  public List<Show> listShowsByRoom(String roomName) {
+    String sql = "SELECT * FROM \"USERNAME\".\"show\" WHERE roomName = ?";
+        try (PreparedStatement statement = createPreparedStatement(con, sql, roomName);
         ResultSet resultSet = statement.executeQuery();) {
 
         List<Show> result = new LinkedList<>();

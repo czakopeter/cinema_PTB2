@@ -47,13 +47,13 @@ public class GuiManager {
       return service.listShowsByFilmId(Long.valueOf(filmId));
     }
     
+    public static List<Show> listShowsByRoom(String roomName) {
+      return service.listShowsByRoom(roomName);
+    }
+      
 /*    
     public static void deleteShow(String showId) {
         
-    }
-    
-    public static List<Show> filterShowByRoom(String roomName) {
-      return null;
     }
     
     public static int getSoldTicketsForFilm(String filmId) {

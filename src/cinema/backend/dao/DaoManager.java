@@ -91,6 +91,14 @@ public class DaoManager {
     return shows;
   }
   
+  public List<Show> listShowsByRoom(String roomName) {
+    open();
+    showDao.setCon(con);
+    List<Show> shows = showDao.listShowsByRoom(roomName);
+    close();
+    return shows;
+  }
+  
   private void open() {
     try {
       DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
