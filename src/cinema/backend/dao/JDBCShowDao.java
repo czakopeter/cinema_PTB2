@@ -68,9 +68,8 @@ public class JDBCShowDao implements ShowDao {
         show.setShowId(resultSet.getLong("showId"));
         show.setFilmId(resultSet.getLong("filmId"));
         show.setRoomName(resultSet.getString("roomName"));
-        show.setStartAtDateTime(LocalDateTime.of(
-                resultSet.getDate("startAtDate").toLocalDate(),
-                resultSet.getTime("startAtTime").toLocalTime()));
+        show.setStartDate(resultSet.getDate("startAtDate").toLocalDate());
+        show.setStartTime(resultSet.getTime("startAtTime").toLocalTime());
         return  show;
     }
     

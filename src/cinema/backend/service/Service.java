@@ -22,4 +22,6 @@ public interface Service {
   public List<Show> listShowsByFilmId(Long filmid);
 
   public List<Show> listShowsByRoom(String roomName);
+
+  public Show getShow(String showId);
 }

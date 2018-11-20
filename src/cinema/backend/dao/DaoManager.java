@@ -99,6 +99,14 @@ public class DaoManager {
     return shows;
   }
   
+  public Show getShow(String showId) {
+    open();
+    showDao.setCon(con);
+    Show show = showDao.findById(Long.valueOf(showId));
+    close();
+    return show;
+  }
+  
   private void open() {
     try {
       DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());

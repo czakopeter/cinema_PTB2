@@ -85,11 +85,10 @@ public class ShowPanel extends JPanel{
   
   private Object[] displayedShowData(Show row) {
     Object[] array = {Long.toString(row.getShowId()),
-                      row.getStartAtDateTime().toString(),
+                      row.getStartDate() + " " + row.getStartTime(),
                       GuiManager.getFilm(Long.toString(row.getFilmId())).getTitle(),
                       row.getRoomName()};
 //                      GuiManager.getEmptySeatForShow(Long.toString(row.getShowId()));
-    
     return array;
   }
 

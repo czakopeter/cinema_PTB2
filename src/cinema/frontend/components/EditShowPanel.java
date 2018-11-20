@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -21,6 +22,7 @@ public class EditShowPanel extends JPanel{
   private JTabbedPane tabbedPane;
   
   private JComboBox filmComboBox, roomComboBox;
+  private JTextField startDate, startTime;
   private JButton addNewShowButton, cancelButton;
   
   private Show show;
@@ -32,8 +34,8 @@ public class EditShowPanel extends JPanel{
   
   public EditShowPanel(JTabbedPane tp, String showId) {
     tabbedPane = tp;
-//    show = GuiManager.getShow(showId);
     initNewShowPanel();
+    setPanelComponents(GuiManager.getShow(showId));
   }
   
   private void initNewShowPanel() {
@@ -62,6 +64,10 @@ public class EditShowPanel extends JPanel{
     cancelButton.addActionListener(this::cancel);
     
     add(buttonsPanel, BorderLayout.SOUTH);
+  }
+  
+  private void setPanelComponents(Show show) {
+    
   }
   
   private void addShow(ActionEvent event) {

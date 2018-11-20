@@ -1,6 +1,8 @@
 package cinema.backend.entities;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 /**
  *
@@ -9,7 +11,8 @@ import java.time.LocalDateTime;
 public class Show {
     private long showId;
     private long filmId;
-    private LocalDateTime startAtDateTime;
+    private LocalDate startDate;
+    private LocalTime startTime;
     private String roomName;
 
     public long getShowId() {
@@ -28,12 +31,20 @@ public class Show {
         this.filmId = filmId;
     }
 
-    public LocalDateTime getStartAtDateTime() {
-        return startAtDateTime;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void setStartAtDateTime(LocalDateTime startAtDateTime) {
-        this.startAtDateTime = startAtDateTime;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+    
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
     }
 
     public String getRoomName() {
@@ -45,12 +56,12 @@ public class Show {
     }
     
     public Object[] toArray() {
-        String[] array = {Long.toString(showId), Long.toString(filmId), startAtDateTime.toString(), roomName};
+        String[] array = {Long.toString(showId), Long.toString(filmId), startDate.toString(), startTime.toString(), roomName};
         return array;
     }
 
     @Override
     public String toString() {
-        return "Show{" + "showId=" + showId + ", filmId=" + filmId + ", startAtDateTime=" + startAtDateTime + ", roomName=" + roomName + '}';
+        return "Show{" + "showId=" + showId + ", filmId=" + filmId + ", startDate=" + startDate +", startTime="+ startTime + ", roomName=" + roomName + '}';
     }
 }

@@ -43,4 +43,9 @@ public class DaoService implements Service {
   public List<Show> listShowsByRoom(String roomName) {
     return dm.listShowsByRoom(roomName);
   }
+
+  @Override
+  public Show getShow(String showId) {
+    return dm.getShow(showId);
+  }
 }

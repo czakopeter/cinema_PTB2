@@ -27,6 +27,10 @@ public class GuiManager {
       return service.getFilm(Long.valueOf(filmId));
     }
     
+    public static Show getShow(String showId) {
+      return service.getShow(showId);
+    }
+    
     public static List<Film> listAllFilms() {
       return service.listAllFilms();
     }
