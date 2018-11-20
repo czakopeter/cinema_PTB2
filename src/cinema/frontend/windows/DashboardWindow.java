@@ -1,8 +1,9 @@
 package cinema.frontend.windows;
 
 
+import cinema.frontend.components.BookingPanel;
 import cinema.frontend.components.FilmPanel;
-import cinema.frontend.components.NewShowPanel;
+import cinema.frontend.components.EditShowPanel;
 import cinema.frontend.components.ShowPanel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -37,14 +38,17 @@ public class DashboardWindow extends JFrame {
     tabbedPane.addTab("Show list", showListPanel);
   }
 
-  public void addNewShowPanelToTabbedPanel() {
-    NewShowPanel nsp = new NewShowPanel(tabbedPane);
-    tabbedPane.addTab("add show", nsp);
+  public void addEditShowPanelToTabbedPanel() {
+    EditShowPanel nsp = new EditShowPanel(tabbedPane);
+    tabbedPane.addTab("Add show", nsp);
     tabbedPane.setEnabled(false);
-    tabbedPane.setSelectedIndex(2);
+    tabbedPane.setSelectedIndex(tabbedPane.getTabCount()-1);
   }
 
-  public void addBookingPanelToTabbedPanel() {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  public void addBookingPanelToTabbedPanel(String showId) {
+    BookingPanel bp = new BookingPanel(tabbedPane, showId);
+    tabbedPane.addTab("Booking tab", bp);
+    tabbedPane.setEnabled(false);
+    tabbedPane.setSelectedIndex(tabbedPane.getTabCount()-1);
   }
 }

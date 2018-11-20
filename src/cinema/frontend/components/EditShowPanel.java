@@ -19,14 +19,14 @@ import javax.swing.SpringLayout;
  *
  * @author CzP
  */
-public class NewShowPanel extends JPanel{
+public class EditShowPanel extends JPanel{
   
   private JTabbedPane tabbedPane;
   
   private JComboBox filmComboBox, roomComboBox;
   private JButton addNewShowButton, cancelButton;
 
-  public NewShowPanel(JTabbedPane tp) {
+  public EditShowPanel(JTabbedPane tp) {
     tabbedPane = tp;
     initNewShowPanel();
   }

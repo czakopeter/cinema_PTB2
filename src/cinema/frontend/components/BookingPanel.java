@@ -60,3 +60,6 @@ public class BookingPanel extends JPanel {
     tabbedPane.setEnabled(true);
   }
 }
+
+//  List<Seat> seats = GuiManager.listSeatsByShow();
+//  GuiManager.modifySeats(seats);

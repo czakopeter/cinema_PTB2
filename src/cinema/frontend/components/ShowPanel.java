@@ -70,6 +70,7 @@ public class ShowPanel extends JPanel{
   
   private void newSelection(ListSelectionEvent event) {
     if(event.getValueIsAdjusting()) {
+      bookButton.setEnabled(true);
       modifyShowButton.setEnabled(true);
       deleteShowButton.setEnabled(true);
     }
@@ -95,8 +96,9 @@ public class ShowPanel extends JPanel{
   private void initButtonsPanel() {
     JPanel showButtonsPanel = new JPanel(new FlowLayout(FlowLayout.TRAILING));
     
-    bookButton = SwingComponentFactory.createButton(showButtonsPanel, "Book");
+    bookButton = SwingComponentFactory.createButton(showButtonsPanel, "Book seat");
     bookButton.addActionListener(this::booking);
+    bookButton.setEnabled(false);
     
     newShowButton = SwingComponentFactory.createButton(showButtonsPanel, "New show");
     newShowButton.addActionListener(this::addNewShow);
@@ -113,19 +115,19 @@ public class ShowPanel extends JPanel{
   }
   
   private void booking(ActionEvent event) {
-    screen.addBookingPanelToTabbedPanel();
+    screen.addBookingPanelToTabbedPanel(showTable.getValueAt(showTable.getSelectedRow(), 0).toString());
   }
   
   private void addNewShow(ActionEvent event) {
-    screen.addNewShowPanelToTabbedPanel();
+    screen.addEditShowPanelToTabbedPanel();
   }
   
   private void modifyShow(ActionEvent event) {
-    
+//    screen.addEditShowPanelToTabbedPanel(showTable.getValueAt(showTable.getSelectedRow(), 0));
   }
   
   private void deleteShow(ActionEvent event) {
-    
+    showTable.getValueAt(showTable.getSelectedRow(), 0);
   }
   
   private void filmFilterSelect(ActionEvent event) {
