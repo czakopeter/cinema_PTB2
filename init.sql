@@ -18,7 +18,8 @@ CREATE TABLE "USERNAME"."show"(
 	showId BIGINT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
 	filmId BIGINT NOT NULL REFERENCES "USERNAME"."film"(filmId),
 	roomName VARCHAR(30) NOT NULL REFERENCES "USERNAME"."room"(roomName),
-	startAtDatetime DATE NOT NULL
+	startAtDate DATE NOT NULL,
+	startAtTime TIME NOT NULL
 );
 CREATE TABLE "USERNAME"."seat"(
 	seatId BIGINT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), 
@@ -118,8 +119,9 @@ INSERT INTO "USERNAME"."room" (roomName, rowNr, columnNr) VALUES
 	('Nautilus',7,7),
 	('Terminator',6,8);
 
-INSERT INTO "USERNAME"."show" (filmId, roomName, startAtDatetime) VALUES
+INSERT INTO "USERNAME"."show" (filmId, roomName, startAtDate, startAtTime) VALUES
 	(1,
 	'Batcave',
-	'2018-11-12'
+	'2018-11-12',
+	'18:30'
 	);

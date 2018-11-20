@@ -44,6 +44,13 @@ public class DashboardWindow extends JFrame {
     tabbedPane.setEnabled(false);
     tabbedPane.setSelectedIndex(tabbedPane.getTabCount()-1);
   }
+  
+  public void addEditShowPanelToTabbedPanel(String showId) {
+    EditShowPanel nsp = new EditShowPanel(tabbedPane, showId);
+    tabbedPane.addTab("Add show", nsp);
+    tabbedPane.setEnabled(false);
+    tabbedPane.setSelectedIndex(tabbedPane.getTabCount()-1);
+  }
 
   public void addBookingPanelToTabbedPanel(String showId) {
     BookingPanel bp = new BookingPanel(tabbedPane, showId);

@@ -1,6 +1,6 @@
 package cinema.backend.entities;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public class Show {
     private long showId;
     private long filmId;
-    private LocalDate startAtDate;
+    private LocalDateTime startAtDateTime;
     private String roomName;
 
     public long getShowId() {
@@ -28,12 +28,12 @@ public class Show {
         this.filmId = filmId;
     }
 
-    public LocalDate getStartAtDate() {
-        return startAtDate;
+    public LocalDateTime getStartAtDateTime() {
+        return startAtDateTime;
     }
 
-    public void setStartAtDate(LocalDate startAtDate) {
-        this.startAtDate = startAtDate;
+    public void setStartAtDateTime(LocalDateTime startAtDateTime) {
+        this.startAtDateTime = startAtDateTime;
     }
 
     public String getRoomName() {
@@ -45,12 +45,12 @@ public class Show {
     }
     
     public Object[] toArray() {
-        String[] array = {Long.toString(showId), Long.toString(filmId), startAtDate.toString(), roomName};
+        String[] array = {Long.toString(showId), Long.toString(filmId), startAtDateTime.toString(), roomName};
         return array;
     }
 
     @Override
     public String toString() {
-        return "Show{" + "showId=" + showId + ", filmId=" + filmId + ", startAtDate=" + startAtDate + ", roomName=" + roomName + '}';
+        return "Show{" + "showId=" + showId + ", filmId=" + filmId + ", startAtDateTime=" + startAtDateTime + ", roomName=" + roomName + '}';
     }
 }

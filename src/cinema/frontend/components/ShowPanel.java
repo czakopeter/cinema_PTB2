@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
 public class ShowPanel extends JPanel{
   private final static Object[] SHOW_COLUMN_NAMES = new Object[]{"ID","Datetime", "Title", "Room", "Available seat"};
   
-  private DashboardWindow screen;
+  private final DashboardWindow screen;
   private JTable showTable;
   private JButton newShowButton, modifyShowButton, deleteShowButton, resetFilterButton, bookButton;
   private JComboBox filmComboBox, roomComboBox;
@@ -85,7 +85,7 @@ public class ShowPanel extends JPanel{
   
   private Object[] displayedShowData(Show row) {
     Object[] array = {Long.toString(row.getShowId()),
-                      row.getStartAtDate().toString(),
+                      row.getStartAtDateTime().toString(),
                       GuiManager.getFilm(Long.toString(row.getFilmId())).getTitle(),
                       row.getRoomName()};
 //                      GuiManager.getEmptySeatForShow(Long.toString(row.getShowId()));
@@ -123,11 +123,12 @@ public class ShowPanel extends JPanel{
   }
   
   private void modifyShow(ActionEvent event) {
-//    screen.addEditShowPanelToTabbedPanel(showTable.getValueAt(showTable.getSelectedRow(), 0));
+    screen.addEditShowPanelToTabbedPanel(showTable.getValueAt(showTable.getSelectedRow(), 0).toString());
   }
   
   private void deleteShow(ActionEvent event) {
-    showTable.getValueAt(showTable.getSelectedRow(), 0);
+//    popup ablak
+//    GuiManager.deleteShow(showTable.getValueAt(showTable.getSelectedRow(), 0).toString());
   }
   
   private void filmFilterSelect(ActionEvent event) {

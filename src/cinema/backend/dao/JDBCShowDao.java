@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -67,7 +68,9 @@ public class JDBCShowDao implements ShowDao {
         show.setShowId(resultSet.getLong("showId"));
         show.setFilmId(resultSet.getLong("filmId"));
         show.setRoomName(resultSet.getString("roomName"));
-        show.setStartAtDate(resultSet.getDate("startAtDatetime").toLocalDate());
+        show.setStartAtDateTime(LocalDateTime.of(
+                resultSet.getDate("startAtDate").toLocalDate(),
+                resultSet.getTime("startAtTime").toLocalTime()));
         return  show;
     }
     

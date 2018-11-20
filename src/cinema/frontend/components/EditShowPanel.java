@@ -1,19 +1,16 @@
 package cinema.frontend.components;
 
+import cinema.backend.entities.Show;
+import cinema.frontend.GuiManager;
 import cinema.frontend.components.factory.SwingComponentFactory;
-import cinema.frontend.windows.DashboardWindow;
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.SpringLayout;
 
 /**
  *
@@ -25,9 +22,17 @@ public class EditShowPanel extends JPanel{
   
   private JComboBox filmComboBox, roomComboBox;
   private JButton addNewShowButton, cancelButton;
+  
+  private Show show;
 
   public EditShowPanel(JTabbedPane tp) {
     tabbedPane = tp;
+    initNewShowPanel();
+  }
+  
+  public EditShowPanel(JTabbedPane tp, String showId) {
+    tabbedPane = tp;
+//    show = GuiManager.getShow(showId);
     initNewShowPanel();
   }
   
