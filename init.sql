@@ -117,11 +117,31 @@ INSERT INTO "USERNAME"."room" (roomName, rowNr, columnNr) VALUES
 	('Stargate',5,9),
 	('Scarface',7,4),
 	('Nautilus',7,7),
-	('Terminator',6,8);
+	('Terminator',6,8),
+	('Room6',8,10),
+	('Room7',8,10),
+	('Room8',8,10),
+	('Room9',8,10),
+	('Room10',8,10);
 
 INSERT INTO "USERNAME"."show" (filmId, roomName, startAtDate, startAtTime) VALUES
+	(3,
+	'Batcave',
+	'2018-11-12',
+	'17:00'
+	),
 	(1,
 	'Batcave',
 	'2018-11-12',
 	'18:30'
+	),
+	(3,
+	'Stargate',
+	'2018-11-12',
+	'21:00'
+	),
+	(4,
+	'Stargate',
+	'2018-11-12',
+	'18:00'
 	);

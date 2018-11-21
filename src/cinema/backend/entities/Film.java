@@ -91,7 +91,7 @@ public class Film {
   }
 
   public String getPosterPath() {
-    return "poster\\\\" + (createPosterName(title)) + ".jpg";
+    return "poster\\\\" + Long.toString(filmId) + ".jpg";
   }
   
   public Object[] toArray() {
@@ -111,20 +111,4 @@ public class Film {
     public String toString() {
         return "Film{" + "filmId=" + filmId + ", title=" + title + ", county=" + county + ", synconized=" + synconized + ", director=" + director + ", storyline=" + storyline + ", runtime=" + runtime + ", licenseToPlay=" + licenseToPlay + ", ageLimit=" + ageLimit + '}';
     }
-  
-  
-
-  private String createPosterName(String title) {
-    String lTitle = title.toLowerCase();
-    String path = "";
-    for(int ch = 0; ch< lTitle.length(); ch++) {
-      if(Character.isLetter(lTitle.charAt(ch))) {
-        path = path + lTitle.charAt(ch);
-      }
-      else {
-        path = path + "_";
-      }
-    }
-    return path;
-  }
 }

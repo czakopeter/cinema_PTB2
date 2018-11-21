@@ -2,6 +2,7 @@ package cinema.frontend.components;
 
 import cinema.backend.entities.Film;
 import cinema.frontend.GuiManager;
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -12,6 +13,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -39,8 +41,14 @@ public class FilmDetailsPanel extends JPanel {
     dataPanel = new JPanel();
   }
 
-  void setFilm(String filmId) {
+  void seDetailsPanelWithtFilm(String filmId) {
     Film film = GuiManager.getFilm(filmId);
+    setPoster(film);
+    setDatePanel(film);
+    
+  }
+
+  private void setPoster(Film film) {
     BufferedImage poster = null;
     try{
       poster = ImageIO.read(new File(film.getPosterPath()));
@@ -54,5 +62,12 @@ public class FilmDetailsPanel extends JPanel {
       poster_frame.setText(null);
       poster_frame.setIcon(new ImageIcon(poster));
     }
+  }
+
+  private void setDatePanel(Film film) {
+    dataPanel.setLayout(new BorderLayout());
+    JTextArea data = new JTextArea(film.toString());
+    data.setLineWrap(true);
+    dataPanel.add(data, BorderLayout.CENTER);
   }
 }
