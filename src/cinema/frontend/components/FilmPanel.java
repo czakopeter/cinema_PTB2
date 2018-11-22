@@ -11,13 +11,14 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import javax.swing.ListSelectionModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
  * @author CzP
  */
 public class FilmPanel extends JPanel {
-  private final static Object[] FILM_COLUMN_NAMES = new Object[]{"ID","Title", "Sync", "Length", "Age limit"};
+  private final static Object[] FILM_COLUMN_NAMES = new Object[]{"ID", "Title", "Sync", "Length", "Age limit"};
 
   private JTable filmTable;
   private FilmDetailsPanel detailsPanel;
@@ -47,22 +48,24 @@ public class FilmPanel extends JPanel {
     filmTable.removeAll();
     DefaultTableModel dtm = new DefaultTableModel(FILM_COLUMN_NAMES, 0);
     content.forEach(row -> dtm.addRow(displayedFilmData(row)));
+
     filmTable.setModel(dtm);
   }
   
   private Object[] displayedFilmData(Film film) {
-      Object[] array = {Long.toString(film.getFilmId()),
-                        film.getTitle(),
-                        film.getSynconized().name(),
-                        Integer.toString(film.getRuntime()),
-                        film.getAgeLimit()};
+      Object[] array = {
+        Long.toString(film.getFilmId()),
+        film.getTitle(),
+        film.getSynconized().name(),
+        Integer.toString(film.getRuntime()),
+        film.getAgeLimit()};
       return array;
   }
   
 
   private void newSelection(ListSelectionEvent event) {
     if(event.getValueIsAdjusting()) {
-      detailsPanel.seDetailsPanelWithtFilm((String)filmTable.getValueAt(filmTable.getSelectedRow(), 0));
+//      detailsPanel.seDetailsPanelWithtFilm((String)filmTable.getValueAt(filmTable.getSelectedRow(), 0));
     }
   }
   
