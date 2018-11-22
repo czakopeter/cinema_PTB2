@@ -3,6 +3,7 @@ package cinema.frontend.components;
 import cinema.backend.entities.Film;
 import cinema.frontend.GuiManager;
 import java.awt.BorderLayout;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -16,7 +17,7 @@ import javax.swing.ListSelectionModel;
  * @author CzP
  */
 public class FilmPanel extends JPanel {
-  private final static Object[] FILM_COLUMN_NAMES = new Object[]{"","Title", "Sync", "Length", "Age limit"};
+  private final static Object[] FILM_COLUMN_NAMES = new Object[]{"ID","Title", "Sync", "Length", "Age limit"};
 
   private JTable filmTable;
   private FilmDetailsPanel detailsPanel;

@@ -3,7 +3,6 @@ package cinema.frontend.components;
 import cinema.backend.entities.Film;
 import cinema.frontend.GuiManager;
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.image.BufferedImage;
@@ -28,11 +27,11 @@ public class FilmDetailsPanel extends JPanel {
   }
 
   private void initFilmDetailsPanel() {
-    setLayout(new FlowLayout(FlowLayout.LEADING));
+    setLayout(new BorderLayout());
     setPreferredSize(new Dimension(182, 268));
     setToEmpty();
-    add(poster_frame);
-    add(dataPanel);
+    add(poster_frame, BorderLayout.WEST);
+    add(dataPanel, BorderLayout.CENTER);
     
   }
 
