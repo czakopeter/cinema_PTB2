@@ -54,14 +54,13 @@ public class GuiManager {
     public static List<Show> listShowsByRoom(String roomName) {
       return service.listShowsByRoom(roomName);
     }
-      
+    
+    public static int getSoldTicketsForFilm(String filmId) {
+      return 0;
+    }
 /*    
     public static void deleteShow(String showId) {
         
-    }
-    
-    public static int getSoldTicketsForFilm(String filmId) {
-        return 0;
     }
     
     public static int getEmptySeatForShow(String showId) {
@@ -76,4 +75,6 @@ public class GuiManager {
         
     }
 */
+
+  
 }

@@ -18,7 +18,8 @@ import javax.swing.table.TableColumn;
  * @author CzP
  */
 public class FilmPanel extends JPanel {
-  private final static Object[] FILM_COLUMN_NAMES = new Object[]{"ID", "Title", "Sync", "Length", "Age limit"};
+  private final static Object[] FILM_COLUMN_NAMES = new Object[]{"Title", "Sync", "Length", "Age limit", "Sold tickets"};
+  private static List<String> listFilmId;
 
   private JTable filmTable;
   private FilmDetailsPanel detailsPanel;
@@ -34,6 +35,7 @@ public class FilmPanel extends JPanel {
   }
   
   private void initFilmTable() {
+    listFilmId = new ArrayList<>();
     filmTable = new JTable(1, 1);
     filmTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     filmTable.setRowSelectionAllowed(true);
@@ -45,27 +47,31 @@ public class FilmPanel extends JPanel {
   }
   
   public void addContentToTable(List<Film> content) {
+    listFilmId.clear();
     filmTable.removeAll();
     DefaultTableModel dtm = new DefaultTableModel(FILM_COLUMN_NAMES, 0);
-    content.forEach(row -> dtm.addRow(displayedFilmData(row)));
-
+    for(Film film : content) {
+      listFilmId.add(Long.toString(film.getFilmId()));
+      dtm.addRow(displayedFilmData(film));
+    }
+    
     filmTable.setModel(dtm);
   }
   
   private Object[] displayedFilmData(Film film) {
       Object[] array = {
-        Long.toString(film.getFilmId()),
         film.getTitle(),
         film.getSynconized().name(),
         Integer.toString(film.getRuntime()),
-        film.getAgeLimit()};
+        film.getAgeLimit(),
+        GuiManager.getSoldTicketsForFilm(Long.toString(film.getFilmId()))};
       return array;
   }
   
 
   private void newSelection(ListSelectionEvent event) {
     if(event.getValueIsAdjusting()) {
-//      detailsPanel.seDetailsPanelWithtFilm((String)filmTable.getValueAt(filmTable.getSelectedRow(), 0));
+      detailsPanel.seDetailsPanelWithtFilm(listFilmId.get(filmTable.getSelectedRow()));
     }
   }
   
