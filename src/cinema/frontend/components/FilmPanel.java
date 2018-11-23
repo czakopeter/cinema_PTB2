@@ -19,7 +19,7 @@ import javax.swing.table.TableColumn;
  */
 public class FilmPanel extends JPanel {
   private final static Object[] FILM_COLUMN_NAMES = new Object[]{"Title", "Sync", "Length", "Age limit", "Sold tickets"};
-  private static List<String> listFilmId;
+  private static List<String> listFilmTableId;
 
   private JTable filmTable;
   private FilmDetailsPanel detailsPanel;
@@ -35,7 +35,7 @@ public class FilmPanel extends JPanel {
   }
   
   private void initFilmTable() {
-    listFilmId = new ArrayList<>();
+    listFilmTableId = new ArrayList<>();
     filmTable = new JTable(1, 1);
     filmTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     filmTable.setRowSelectionAllowed(true);
@@ -47,11 +47,11 @@ public class FilmPanel extends JPanel {
   }
   
   public void addContentToTable(List<Film> content) {
-    listFilmId.clear();
+    listFilmTableId.clear();
     filmTable.removeAll();
     DefaultTableModel dtm = new DefaultTableModel(FILM_COLUMN_NAMES, 0);
     for(Film film : content) {
-      listFilmId.add(Long.toString(film.getFilmId()));
+      listFilmTableId.add(Long.toString(film.getFilmId()));
       dtm.addRow(displayedFilmData(film));
     }
     
@@ -71,7 +71,7 @@ public class FilmPanel extends JPanel {
 
   private void newSelection(ListSelectionEvent event) {
     if(event.getValueIsAdjusting()) {
-      detailsPanel.seDetailsPanelWithtFilm(listFilmId.get(filmTable.getSelectedRow()));
+      detailsPanel.seDetailsPanelWithtFilm(listFilmTableId.get(filmTable.getSelectedRow()));
     }
   }
   

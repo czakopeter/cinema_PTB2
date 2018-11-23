@@ -1,5 +1,6 @@
 package cinema.frontend.components;
 
+import cinema.backend.entities.Film;
 import cinema.backend.entities.Show;
 import cinema.frontend.GuiManager;
 import cinema.frontend.components.factory.SwingComponentFactory;
@@ -7,6 +8,7 @@ import cinema.frontend.windows.DashboardWindow;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -22,7 +24,9 @@ import javax.swing.table.DefaultTableModel;
  * @author CzPet
  */
 public class ShowPanel extends JPanel{
-  private final static Object[] SHOW_COLUMN_NAMES = new Object[]{"ID","Datetime", "Title", "Room", "Available seat"};
+  private final static Object[] SHOW_COLUMN_NAMES = new Object[]{"Datetime", "Title", "Room", "Available seat"};
+  private static List<String> listFilmFilterId;
+  private static List<String> listShowTableId;
   
   private final DashboardWindow screen;
   private JTable showTable;
@@ -45,8 +49,12 @@ public class ShowPanel extends JPanel{
   private void initFilterPanel() {
     JPanel filterPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
     
+    listFilmFilterId = new ArrayList<>();
     filmComboBox = SwingComponentFactory.createComboBox(filterPanel, "Film filter");
-    GuiManager.listAllFilms().forEach(film -> filmComboBox.addItem(film.getTitle() + " (" + film.getFilmId() + ")"));
+    for(Film film : GuiManager.listAllFilms()) {
+      listFilmFilterId.add(Long.toString(film.getFilmId()));
+      filmComboBox.addItem(film.getTitle());
+    }
     filmComboBox.addActionListener(this::filmFilterSelect);
     
     roomComboBox = SwingComponentFactory.createComboBox(filterPanel, "Room filter");
@@ -59,6 +67,7 @@ public class ShowPanel extends JPanel{
   }
 
   private void initShowTable() {
+    listShowTableId = new ArrayList<>();
     showTable = new JTable(1, 1);
     showTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     showTable.setRowSelectionAllowed(true);
@@ -66,6 +75,17 @@ public class ShowPanel extends JPanel{
     
     add(new JScrollPane(showTable), BorderLayout.CENTER);
     addContentToTable(GuiManager.listAllShows());
+  }
+  
+  private void addContentToTable(List<Show> content) {
+    listShowTableId.clear();
+    showTable.removeAll();
+    DefaultTableModel dtm = new DefaultTableModel(SHOW_COLUMN_NAMES, 0);
+    for(Show show : content) {
+      listShowTableId.add(Long.toString(show.getShowId()));
+      dtm.addRow(displayedShowData(show));
+    }
+    showTable.setModel(dtm);
   }
   
   private void newSelection(ListSelectionEvent event) {
@@ -76,19 +96,12 @@ public class ShowPanel extends JPanel{
     }
   }
   
-  private void addContentToTable(List<Show> content) {
-    showTable.removeAll();
-    DefaultTableModel dtm = new DefaultTableModel(SHOW_COLUMN_NAMES, 0);
-    content.forEach(row -> dtm.addRow(displayedShowData(row)));
-    showTable.setModel(dtm);
-  }
-  
   private Object[] displayedShowData(Show row) {
-    Object[] array = {Long.toString(row.getShowId()),
-                      row.getStartDate() + " " + row.getStartTime(),
-                      GuiManager.getFilm(Long.toString(row.getFilmId())).getTitle(),
-                      row.getRoomName()};
-//                      GuiManager.getEmptySeatForShow(Long.toString(row.getShowId()));
+    Object[] array = {
+      row.getStartDate() + " " + row.getStartTime(),
+      GuiManager.getFilm(Long.toString(row.getFilmId())).getTitle(),
+      row.getRoomName(),
+      GuiManager.getEmptySeatForShow(Long.toString(row.getShowId()))};
     return array;
   }
 
@@ -114,7 +127,7 @@ public class ShowPanel extends JPanel{
   }
   
   private void booking(ActionEvent event) {
-    screen.addBookingPanelToTabbedPanel(showTable.getValueAt(showTable.getSelectedRow(), 0).toString());
+    screen.addBookingPanelToTabbedPanel(listShowTableId.get(showTable.getSelectedRow()));
   }
   
   private void addNewShow(ActionEvent event) {
@@ -122,7 +135,7 @@ public class ShowPanel extends JPanel{
   }
   
   private void modifyShow(ActionEvent event) {
-    screen.addEditShowPanelToTabbedPanel(showTable.getValueAt(showTable.getSelectedRow(), 0).toString());
+    screen.addEditShowPanelToTabbedPanel(listShowTableId.get(showTable.getSelectedRow()));
   }
   
   private void deleteShow(ActionEvent event) {
@@ -133,8 +146,8 @@ public class ShowPanel extends JPanel{
   private void filmFilterSelect(ActionEvent event) {
     if(filmComboBox.getSelectedIndex() != 0) {
       roomComboBox.setSelectedIndex(0);
-      String line = filmComboBox.getSelectedItem().toString();
-      addContentToTable(GuiManager.listShowsByFilmId(line.substring(line.lastIndexOf('(')+1, line.length()-1)));
+      System.out.println(filmComboBox.getSelectedIndex());
+      addContentToTable(GuiManager.listShowsByFilmId(listFilmFilterId.get(filmComboBox.getSelectedIndex()-1)));
     }
     else if(roomComboBox.getSelectedIndex() == 0){
       addContentToTable(GuiManager.listAllShows());

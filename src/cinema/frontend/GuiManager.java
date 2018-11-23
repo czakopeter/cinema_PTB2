@@ -76,5 +76,9 @@ public class GuiManager {
     }
 */
 
+  public static int getEmptySeatForShow(String showId) {
+    return 0;
+  }
+
   
 }
