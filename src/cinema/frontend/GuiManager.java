@@ -2,6 +2,7 @@ package cinema.frontend;
 
 import cinema.backend.entities.Film;
 import cinema.backend.entities.Room;
+import cinema.backend.entities.Seat;
 import cinema.backend.entities.Show;
 import cinema.backend.service.DaoService;
 import cinema.backend.service.Service;
@@ -58,27 +59,21 @@ public class GuiManager {
     public static int getSoldTicketsForFilm(String filmId) {
       return 0;
     }
+    
+    public static int getEmptySeatForShow(String showId) {
+      return 0;
+    }
+    
+    public static void modifyBooking(List<Seat> seats) {
+        
+    }
 /*    
     public static void deleteShow(String showId) {
         
     }
-    
-    public static int getEmptySeatForShow(String showId) {
-        return 0;
-    }
-    
-    public static void modifyBooking(List<Seat>) {
-        
-    }
-    
-    public static void showBookingWindow() {
-        
-    }
 */
 
-  public static int getEmptySeatForShow(String showId) {
-    return 0;
+  public static Room getRoom(String roomName) {
+    service.getRoom(roomName);
   }
-
-  
 }

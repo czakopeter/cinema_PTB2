@@ -24,4 +24,6 @@ public interface Service {
   public List<Show> listShowsByRoom(String roomName);
 
   public Show getShow(String showId);
+
+  public void getRoom(String roomName);
 }
