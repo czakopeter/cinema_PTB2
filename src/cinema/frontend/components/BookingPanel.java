@@ -67,21 +67,29 @@ public class BookingPanel extends JPanel {
   
   private void initSeatRepPanel() {
     Room room = GuiManager.getRoom(GuiManager.getShow(showId).getRoomName());
-    JPanel seatsRepPanel = initSeatsRepPanel(room);
+    List<Seat> seats = GuiManager.getSeatsByShow(showId);
+    JPanel seatRepPanel = initSeatsRepPanel(room, seats);
     
-    add(seatsRepPanel, BorderLayout.CENTER);
+    add(seatRepPanel, BorderLayout.CENTER);
   }
   
-  private JPanel initSeatsRepPanel(Room room) {
+  private JPanel initSeatsRepPanel(Room room, List<Seat> seats) {
     JPanel panel = new JPanel(new GridLayout(room.getRowNr(), room.getColumnNr()));
     for(int row = 0; row<room.getRowNr(); ++row) {
       for(int column = 0; column< room.getColumnNr(); ++ column) {
-        JButton jb = new MyButton();
-        jb.setBackground(Color.red);
+        JButton jb = SwingComponentFactory.createSeatButton(row, column, showId);
+        jb.addActionListener(this::changeStatus);
         panel.add(jb);
       }
     }
     return panel;
+  }
+  
+  
+  
+  private void changeStatus(ActionEvent event) {
+    SeatButton b = (SeatButton)event.getSource();
+    b.setBackground(b.changeStatus());
   }
 
   private void initButtonsPanel() {

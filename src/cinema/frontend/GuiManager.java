@@ -74,6 +74,10 @@ public class GuiManager {
 */
 
   public static Room getRoom(String roomName) {
-    service.getRoom(roomName);
+    return service.getRoom(roomName);
+  }
+
+  public static List<Seat> getSeatsByShow(String showId) {
+    return null;
   }
 }

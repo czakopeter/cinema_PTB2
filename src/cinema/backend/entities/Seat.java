@@ -6,7 +6,7 @@ import cinema.backend.enums.SeatStatus;
  *
  * @author CzP
  */
-public class Seat {
+public class Seat implements Comparable<Seat>{
     private long seatId;
     private long showId;
     private String roomName;
@@ -77,4 +77,14 @@ public class Seat {
     public String toString() {
         return "Seat{" + "seatId=" + seatId + ", showId=" + showId + ", roomName=" + roomName + ", row=" + row + ", column=" + column + ", status=" + status + '}';
     }
+
+  @Override
+  public int compareTo(Seat o) {
+    if((this.row - o.row) == 0) {
+      return this.column - o.column;
+    }
+    else {
+      return this.row - o.row;
+    }
+  }
 }

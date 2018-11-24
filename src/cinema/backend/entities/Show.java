@@ -8,7 +8,7 @@ import java.time.LocalTime;
  *
  * @author CzP
  */
-public class Show {
+public class Show{
     private long showId;
     private long filmId;
     private LocalDate startDate;

@@ -25,5 +25,5 @@ public interface Service {
 
   public Show getShow(String showId);
 
-  public void getRoom(String roomName);
+  public Room getRoom(String roomName);
 }
