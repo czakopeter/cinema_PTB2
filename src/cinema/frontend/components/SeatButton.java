@@ -17,7 +17,6 @@ public class SeatButton extends JButton {
   public SeatButton(int row, int column) {
     this.row = row;
     this.column = column;
-    statudIdx = 0;
   }
 
   public int getRow() {
@@ -35,7 +34,7 @@ public class SeatButton extends JButton {
   public void setStatus(String st) {
     if(st.equals("A")) {
       statudIdx = 1;
-    } else {
+    } else if (st.equals("O")) {
       statudIdx = 0;
     }
   }

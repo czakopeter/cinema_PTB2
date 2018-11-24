@@ -51,6 +51,8 @@ public class EditShowPanel extends JPanel{
     
     filmComboBox = SwingComponentFactory.createComboBox(inputPanel, "Select film");
     roomComboBox = SwingComponentFactory.createComboBox(inputPanel, "Select room");
+    startDate = SwingComponentFactory.createTextField(inputPanel, "Date");
+    startDate = SwingComponentFactory.createTextField(inputPanel, "Time");
     
     add(inputPanel, BorderLayout.NORTH);
   }

@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -21,10 +22,10 @@ public final class SwingComponentFactory {
         return button;
     }
     
-    public static JComboBox createComboBox(JPanel panel, String text) {
+    public static JComboBox createComboBox(JPanel panel, String labelText) {
       JComboBox comboBox = new JComboBox();
       comboBox.addItem("");
-      JLabel label = new JLabel(text);
+      JLabel label = new JLabel(labelText);
       panel.add(label);
       panel.add(comboBox);
       return comboBox;
@@ -36,5 +37,13 @@ public final class SwingComponentFactory {
       jb.setBackground(jb.getStatus());
       jb.setText(Integer.toString(row+1) + "/" + Integer.toString(column+1));
       return jb;
+    }
+    
+    public static JTextField createTextField(JPanel panel, String labelText) {
+      JLabel label = new JLabel(labelText);
+      JTextField tf = new JTextField();
+      panel.add(label);
+      panel.add(tf);
+      return tf;
     }
 }

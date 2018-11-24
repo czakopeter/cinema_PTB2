@@ -4,6 +4,7 @@ import cinema.backend.entities.Film;
 import cinema.backend.entities.Room;
 import cinema.backend.entities.Seat;
 import cinema.backend.entities.Show;
+import cinema.backend.enums.SeatStatus;
 import cinema.frontend.GuiManager;
 import cinema.frontend.components.factory.SwingComponentFactory;
 import java.awt.BorderLayout;
@@ -12,6 +13,7 @@ import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.layout.Pane;
 import javax.swing.JButton;
@@ -67,17 +69,29 @@ public class BookingPanel extends JPanel {
   
   private void initSeatRepPanel() {
     Room room = GuiManager.getRoom(GuiManager.getShow(showId).getRoomName());
-    List<Seat> seats = GuiManager.getSeatsByShow(showId);
-    JPanel seatRepPanel = initSeatsRepPanel(room, seats);
+//    List<Seat> seats = GuiManager.getSeatsByShow(showId);
+//    List<Seat> seats = new ArrayList<>();
+    Seat s = new Seat();
+    s.setColumn(2);
+    s.setRow(1);
+    s.setStatus(SeatStatus.O);
+//    seats.add(s);
+    
+    JPanel seatRepPanel = initSeatsRepPanel(room, s);
     
     add(seatRepPanel, BorderLayout.CENTER);
   }
   
-  private JPanel initSeatsRepPanel(Room room, List<Seat> seats) {
+  private JPanel initSeatsRepPanel(Room room, Seat seats) {
     JPanel panel = new JPanel(new GridLayout(room.getRowNr(), room.getColumnNr()));
     for(int row = 0; row<room.getRowNr(); ++row) {
       for(int column = 0; column< room.getColumnNr(); ++ column) {
-        JButton jb = SwingComponentFactory.createSeatButton(row, column, showId);
+        JButton jb;
+        if(row == seats.getRow() && column == seats.getColumn()) {
+          jb = SwingComponentFactory.createSeatButton(row, column, seats.getStatus().name());
+        } else {
+          jb = SwingComponentFactory.createSeatButton(row, column, "A");
+        }
         jb.addActionListener(this::changeStatus);
         panel.add(jb);
       }
