@@ -1,10 +1,7 @@
 package cinema.backend.dao;
 
-import cinema.backend.entities.Film;
 import cinema.backend.entities.Seat;
-import cinema.backend.enums.AgeLimit;
 import cinema.backend.enums.SeatStatus;
-import cinema.backend.enums.Sync;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

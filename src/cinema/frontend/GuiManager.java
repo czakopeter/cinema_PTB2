@@ -78,6 +78,6 @@ public class GuiManager {
   }
 
   public static List<Seat> getSeatsByShow(String showId) {
-    return null;
+    return service.listSeatsByShowId(Long.valueOf(showId));
   }
 }

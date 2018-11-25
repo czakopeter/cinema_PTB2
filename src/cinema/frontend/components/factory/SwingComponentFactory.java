@@ -1,6 +1,5 @@
 package cinema.frontend.components.factory;
 
-import cinema.frontend.components.SeatButton;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
