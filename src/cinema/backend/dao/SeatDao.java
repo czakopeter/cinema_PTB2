@@ -1,12 +1,12 @@
 package cinema.backend.dao;
 
-import cinema.backend.entities.Seat;
+import cinema.backend.entities.Seats;
 import java.util.List;
 
 /**
  *
  * @author CzPet
  */
-public interface SeatDao extends CRUDDao<Seat, Long>{
-  List<Seat> findByShowId(Long showId);
+public interface SeatDao extends CRUDDao<Seats, Long>{
+  List<Seats> findByShowId(Long showId);
 }

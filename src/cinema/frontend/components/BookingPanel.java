@@ -2,7 +2,7 @@ package cinema.frontend.components;
 
 import cinema.frontend.components.factory.SeatButton;
 import cinema.backend.entities.Room;
-import cinema.backend.entities.Seat;
+import cinema.backend.entities.Seats;
 import cinema.backend.entities.Show;
 import cinema.frontend.GuiManager;
 import cinema.frontend.components.factory.SwingComponentFactory;
@@ -12,6 +12,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -26,15 +27,23 @@ import javax.swing.SwingConstants;
 public class BookingPanel extends JPanel {
   
   private final JTabbedPane tabbedPane;
-  private final String showId;
   private JButton saveButton, dropButton, cancelButton;
-  private JPanel seatRepPanel;
+  private JPanel seatsPanel;
+  private Seats seats;
+  private int rowLength;
   
-  public BookingPanel(JTabbedPane tp, String showId) {
+  public BookingPanel(JTabbedPane tp, Seats seats) {
     tabbedPane = tp;
-    this.showId = showId;
+    this.seats = seats;
     
     initBookingpanel();
+  }
+  
+  private void initBookingpanel() {
+    setLayout(new BorderLayout());
+    initInfoPanel();
+    initSeatsPanel();
+    initButtonsPanel();
   }
 
   private void initInfoPanel() {
@@ -52,32 +61,40 @@ public class BookingPanel extends JPanel {
   }
   
   private String getInfo() {
-    Show show = GuiManager.getShow(showId);
+    Show show = GuiManager.getShow(seats.getShowId());
     return GuiManager.getFilm(Long.toString(show.getFilmId())).getTitle() +
-           "    " + show.getStartDate().toString() + 
+           "\t" + show.getStartDate().toString() + 
            " " + show.getStartTime().toString();
   }
   
-  private void initBookingpanel() {
-    setLayout(new BorderLayout());
-    initInfoPanel();
-    initSeatRepPanel();
-    initButtonsPanel();
+  private void initSeatsPanel() {
+    seatsPanel = new JPanel();
+    initSeatsButton();
+    setSeatsButton();
+    add(seatsPanel, BorderLayout.CENTER);
   }
   
-  private void initSeatRepPanel() {
-    Room room = GuiManager.getRoom(GuiManager.getShow(showId).getRoomName());
-    List<Seat> seats = GuiManager.getSeatsByShow(showId);
+  private void initSeatsButton() {
+    seatsPanel.removeAll();
+    Room room = GuiManager.getRoom(seats.getRoomName());
+    rowLength = room.getColumnNr();
     
-    seatRepPanel = new JPanel(new GridLayout(room.getRowNr(), room.getColumnNr()));
+    seatsPanel.setLayout(new GridLayout(room.getRowNr(), room.getColumnNr()));
     for(int row = 0; row<room.getRowNr(); ++row) {
       for(int column = 0; column< room.getColumnNr(); ++ column) {
-        JButton jb = SwingComponentFactory.createSeatButton(row, column, "A");
+        JButton jb = SwingComponentFactory.createSeatButton(row, column);
         jb.addActionListener(this::changeStatus);
-        seatRepPanel.add(jb);
+        seatsPanel.add(jb);
       }
     }
-    add(seatRepPanel, BorderLayout.CENTER);
+    seatsPanel.revalidate();
+  }
+  
+  private void setSeatsButton() {
+    SeatButton[] buttonArray = (SeatButton[])seatsPanel.getComponents();
+    for(SeatButton sb : buttonArray) {
+      sb.setStatus(seats.getSeatsStatus().charAt(sb.getRow()*rowLength+sb.getColumn()));
+    }
   }
 
   private void changeStatus(ActionEvent event) {
@@ -101,11 +118,12 @@ public class BookingPanel extends JPanel {
   }
   
   private void saveChanges(ActionEvent event) {
-    GuiManager.modifyBooking(getSeatsState());
+    setSeatsState();
+    GuiManager.modifyBooking(seats);
   }
   
   private void dropChanges(ActionEvent event) {
-    initBookingpanel();
+    setSeatsButton();
   }
   
   private void cancel(ActionEvent event) {
@@ -114,11 +132,12 @@ public class BookingPanel extends JPanel {
     tabbedPane.setEnabled(true);
   }
 
-  private List<Seat> getSeatsState() {
-    SeatButton[] bt = (SeatButton[])seatRepPanel.getComponents();
-    List<Seat> seats = new ArrayList<>();
-    return null;
+  private void setSeatsState() {
+    SeatButton[] buttonArray = (SeatButton[])seatsPanel.getComponents();
+    char[] chSeats = seats.getSeatsStatus().toCharArray();
+    for(SeatButton sb : buttonArray) {
+      chSeats[sb.getRow()*rowLength + sb.getColumn()] = sb.getSeatStatus();
+    }
+    seats.setSeatsStatus(Arrays.toString(chSeats));
   }
 }
-
-//  List<Seat> seats = GuiManager.listSeatsByShow();

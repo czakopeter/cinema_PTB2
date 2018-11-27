@@ -1,6 +1,6 @@
 package cinema.backend.dao;
 
-import cinema.backend.entities.Seat;
+import cinema.backend.entities.Seats;
 import cinema.backend.enums.SeatStatus;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,12 +28,12 @@ public class JDBCSeatDao implements SeatDao {
   }
   
   @Override
-  public List<Seat> findAll() {
+  public List<Seats> findAll() {
     String sql = "SELECT * FROM \"USERNAME\".\"seat\"";
     
     try (PreparedStatement statement = con.prepareStatement(sql);
         ResultSet resultSet = statement.executeQuery();) {
-      List<Seat> result = new LinkedList<>();
+      List<Seats> result = new LinkedList<>();
       while (resultSet.next()) {
         result.add(setSeat(resultSet));
       }
@@ -46,12 +46,12 @@ public class JDBCSeatDao implements SeatDao {
   }
 
   @Override
-  public Seat findById(Long key) {
-    String sql = "SELECT * FROM \"USERNAME\".\"Seat\" WHERE seatId = ?";
+  public Seats findById(Long key) {
+    String sql = "SELECT * FROM \"USERNAME\".\"seat\" WHERE seatId = ?";
     try (PreparedStatement statement = createPreparedStatement(con, sql, key);
       ResultSet resultSet = statement.executeQuery();) {
 
-      List<Seat> result = new LinkedList<>();
+      List<Seats> result = new LinkedList<>();
       while (resultSet.next()) {
         result.add(setSeat(resultSet));
       }
@@ -63,8 +63,8 @@ public class JDBCSeatDao implements SeatDao {
   return null;
   }
   
-  private Seat setSeat(ResultSet resultSet) throws SQLException {
-    Seat seat = new Seat();
+  private Seats setSeat(ResultSet resultSet) throws SQLException {
+    Seats seat = new Seats();
     seat.setSeatId(resultSet.getLong("seatId"));
     seat.setShowId(resultSet.getLong("showId"));
     seat.setRoomName(resultSet.getString("roomName"));
@@ -83,12 +83,12 @@ public class JDBCSeatDao implements SeatDao {
   }
 
   @Override
-  public List<Seat> findByShowId(Long showId) {
-    String sql = "SELECT * FROM \"USERNAME\".\"Seat\" WHERE showId = ?";
+  public List<Seats> findByShowId(Long key) {
+    String sql = "SELECT * FROM \"USERNAME\".\"seat\" WHERE showId = ?";
     
-    try (PreparedStatement statement = con.prepareStatement(sql);
-        ResultSet resultSet = statement.executeQuery();) {
-      List<Seat> result = new LinkedList<>();
+    try (PreparedStatement statement = createPreparedStatement(con, sql, key);
+      ResultSet resultSet = statement.executeQuery();) {
+      List<Seats> result = new LinkedList<>();
       while (resultSet.next()) {
         result.add(setSeat(resultSet));
       }

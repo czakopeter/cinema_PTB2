@@ -2,7 +2,7 @@ package cinema.frontend;
 
 import cinema.backend.entities.Film;
 import cinema.backend.entities.Room;
-import cinema.backend.entities.Seat;
+import cinema.backend.entities.Seats;
 import cinema.backend.entities.Show;
 import cinema.backend.service.DaoService;
 import cinema.backend.service.Service;
@@ -28,8 +28,8 @@ public class GuiManager {
       return service.getFilm(Long.valueOf(filmId));
     }
     
-    public static Show getShow(String showId) {
-      return service.getShow(showId);
+    public static Show getShow(Long showId) {
+      return service.getShow(String.valueOf(showId));
     }
     
     public static List<Film> listAllFilms() {
@@ -64,8 +64,7 @@ public class GuiManager {
       return 0;
     }
     
-    public static void modifyBooking(List<Seat> seats) {
-        
+    public static void modifyBooking(Seats seats) {
     }
 /*    
     public static void deleteShow(String showId) {
@@ -77,7 +76,7 @@ public class GuiManager {
     return service.getRoom(roomName);
   }
 
-  public static List<Seat> getSeatsByShow(String showId) {
+  public static List<Seats> getSeatsByShow(String showId) {
     return service.listSeatsByShowId(Long.valueOf(showId));
   }
 }

@@ -21,13 +21,11 @@ CREATE TABLE "USERNAME"."show"(
 	startAtDate DATE NOT NULL,
 	startAtTime TIME NOT NULL
 );
-CREATE TABLE "USERNAME"."seat"(
-	seatId BIGINT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), 
+CREATE TABLE "USERNAME"."seats"(
+	seatsId BIGINT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), 
 	showId BIGINT NOT NULL REFERENCES "USERNAME"."show"(showId),
 	roomName VARCHAR(30) NOT NULL REFERENCES "USERNAME"."room"(roomName),
-	rowIdx INT NOT NULL,
-	columnIdx INT NOT NULL,
-	status VARCHAR(1) NOT NULL
+	seatsStatus VARCHAR(200) NOT NULL
 );
 
 INSERT INTO "USERNAME"."film" (title, country, syncronized, director, storyline, runtime, licenseToPlay, ageLimit) VALUES
@@ -113,11 +111,11 @@ INSERT INTO "USERNAME"."film" (title, country, syncronized, director, storyline,
 	'2');
 
 INSERT INTO "USERNAME"."room" (roomName, rowNr, columnNr) VALUES
-	('Batcave',4,8),
-	('Stargate',5,9),
-	('Scarface',7,4),
-	('Nautilus',7,7),
-	('Terminator',6,8),
+	('Batcave',3,4),
+	('Stargate',4,3),
+	('Scarface',4,4),
+	('Nautilus',1,2),
+	('Terminator',3,3),
 	('Room6',8,10),
 	('Room7',8,10),
 	('Room8',8,10),
@@ -144,4 +142,22 @@ INSERT INTO "USERNAME"."show" (filmId, roomName, startAtDate, startAtTime) VALUE
 	'Stargate',
 	'2018-11-12',
 	'18:00'
+	);
+
+INSERT INTO "USERNAME"."seats" (showId, roomName, seatsStatus) VALUES
+	(1,
+	'Batcave',
+	'AAAAOOOOAAAA'
+	),
+	(2,
+	'Batcave',
+	'OOOOAAAAOOO'
+	),
+	(3,
+	'Stargate',
+	'OOOAAAOOOAAA'
+	),
+	(4,
+	'Stargate',
+	'AAAAAAAAAAAA'
 	);

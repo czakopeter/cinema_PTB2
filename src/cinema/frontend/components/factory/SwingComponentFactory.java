@@ -30,10 +30,10 @@ public final class SwingComponentFactory {
       return comboBox;
     }
     
-    public static JButton createSeatButton(int row, int column, String st) {
+    public static JButton createSeatButton(int row, int column) {
       SeatButton jb = new SeatButton(row, column);
-      jb.setStatus(st);
-      jb.setBackground(jb.getStatus());
+      jb.setStatus('A');
+      jb.setBackground(jb.getColorStatus());
       jb.setText(Integer.toString(row+1) + "/" + Integer.toString(column+1));
       return jb;
     }

@@ -13,6 +13,7 @@ public class SeatButton extends JButton {
   private int statudIdx;
           
   private static Color[] status = {Color.red, Color.green};
+  private final int colorsNr = status.length;
   
   public SeatButton(int row, int column) {
     this.row = row;
@@ -27,20 +28,31 @@ public class SeatButton extends JButton {
     return column;
   }
   
-  public Color getStatus() {
+  public Color getColorStatus() {
     return status[statudIdx];
   }
   
-  public void setStatus(String st) {
-    if(st.equals("A")) {
+  public Character getSeatStatus() {
+    switch (statudIdx) {
+      case 0:
+        return 'O';
+      case 1:
+        return 'A';
+      default:
+        return null;
+    }
+  }
+  
+  public void setStatus(char st) {
+    if(st == 'A') {
       statudIdx = 1;
-    } else if (st.equals("O")) {
+    } else if (st == 'O') {
       statudIdx = 0;
     }
   }
   
   public Color changeStatus() {
-    statudIdx = (statudIdx + 1)%2;
+    statudIdx = (statudIdx + 1)%colorsNr;
     return status[statudIdx];
   }
 }

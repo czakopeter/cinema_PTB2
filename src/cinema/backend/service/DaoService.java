@@ -3,7 +3,7 @@ package cinema.backend.service;
 import cinema.backend.dao.DaoManager;
 import cinema.backend.entities.Film;
 import cinema.backend.entities.Room;
-import cinema.backend.entities.Seat;
+import cinema.backend.entities.Seats;
 import cinema.backend.entities.Show;
 import java.util.List;
 
@@ -56,7 +56,7 @@ public class DaoService implements Service {
   }
 
   @Override
-  public List<Seat> listSeatsByShowId(Long showId) {
+  public List<Seats> listSeatsByShowId(Long showId) {
     return dm.listSeatsByShowId(showId);
   }
 }

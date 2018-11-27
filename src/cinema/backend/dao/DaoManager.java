@@ -2,7 +2,7 @@ package cinema.backend.dao;
 
 import cinema.backend.entities.Film;
 import cinema.backend.entities.Room;
-import cinema.backend.entities.Seat;
+import cinema.backend.entities.Seats;
 import cinema.backend.entities.Show;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -75,10 +75,10 @@ public class DaoManager {
     return room;
   }
   
-  public List<Seat> listSeatsByShowId(long showId) {
+  public List<Seats> listSeatsByShowId(long showId) {
     open();
     seatDao.setCon(con);
-    List<Seat> seats = seatDao.findByShowId(showId);
+    List<Seats> seats = seatDao.findByShowId(showId);
     close();
     return seats;
   }
