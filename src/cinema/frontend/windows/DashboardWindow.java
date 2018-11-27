@@ -1,6 +1,7 @@
 package cinema.frontend.windows;
 
 
+import cinema.frontend.GuiManager;
 import cinema.frontend.components.BookingPanel;
 import cinema.frontend.components.FilmPanel;
 import cinema.frontend.components.EditShowPanel;

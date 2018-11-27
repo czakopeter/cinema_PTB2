@@ -8,6 +8,7 @@ import cinema.frontend.GuiManager;
 import cinema.frontend.components.factory.SwingComponentFactory;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -32,9 +33,9 @@ public class BookingPanel extends JPanel {
   private Seats seats;
   private int rowLength;
   
-  public BookingPanel(JTabbedPane tp, Seats seats) {
+  public BookingPanel(JTabbedPane tp, String filmId) {
     tabbedPane = tp;
-    this.seats = seats;
+    this.seats = GuiManager.getSeatsByShow(filmId);
     
     initBookingpanel();
   }
@@ -61,7 +62,7 @@ public class BookingPanel extends JPanel {
   }
   
   private String getInfo() {
-    Show show = GuiManager.getShow(seats.getShowId());
+    Show show = GuiManager.getShow(Long.toString(seats.getShowId()));
     return GuiManager.getFilm(Long.toString(show.getFilmId())).getTitle() +
            "\t" + show.getStartDate().toString() + 
            " " + show.getStartTime().toString();
@@ -82,17 +83,17 @@ public class BookingPanel extends JPanel {
     seatsPanel.setLayout(new GridLayout(room.getRowNr(), room.getColumnNr()));
     for(int row = 0; row<room.getRowNr(); ++row) {
       for(int column = 0; column< room.getColumnNr(); ++ column) {
-        JButton jb = SwingComponentFactory.createSeatButton(row, column);
-        jb.addActionListener(this::changeStatus);
-        seatsPanel.add(jb);
+        SeatButton sb = SwingComponentFactory.createSeatButton(row, column);
+        sb.addActionListener(this::changeStatus);
+        seatsPanel.add(sb);
       }
     }
     seatsPanel.revalidate();
   }
   
   private void setSeatsButton() {
-    SeatButton[] buttonArray = (SeatButton[])seatsPanel.getComponents();
-    for(SeatButton sb : buttonArray) {
+    for(Component component : seatsPanel.getComponents()) {
+      SeatButton sb = (SeatButton) component;
       sb.setStatus(seats.getSeatsStatus().charAt(sb.getRow()*rowLength+sb.getColumn()));
     }
   }

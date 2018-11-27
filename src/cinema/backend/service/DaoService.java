@@ -56,7 +56,7 @@ public class DaoService implements Service {
   }
 
   @Override
-  public List<Seats> listSeatsByShowId(Long showId) {
+  public Seats listSeatsByShowId(Long showId) {
     return dm.listSeatsByShowId(showId);
   }
 }

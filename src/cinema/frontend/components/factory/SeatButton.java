@@ -12,7 +12,7 @@ public class SeatButton extends JButton {
   private final int column;
   private int statudIdx;
           
-  private static Color[] status = {Color.red, Color.green};
+  private static final Color[] status = {Color.red, Color.green};
   private final int colorsNr = status.length;
   
   public SeatButton(int row, int column) {

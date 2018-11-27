@@ -30,12 +30,12 @@ public final class SwingComponentFactory {
       return comboBox;
     }
     
-    public static JButton createSeatButton(int row, int column) {
-      SeatButton jb = new SeatButton(row, column);
-      jb.setStatus('A');
-      jb.setBackground(jb.getColorStatus());
-      jb.setText(Integer.toString(row+1) + "/" + Integer.toString(column+1));
-      return jb;
+    public static SeatButton createSeatButton(int row, int column) {
+      SeatButton sb = new SeatButton(row, column);
+      sb.setStatus('A');
+      sb.setBackground(sb.getColorStatus());
+      sb.setText(Integer.toString(row+1) + "/" + Integer.toString(column+1));
+      return sb;
     }
     
     public static JTextField createTextField(JPanel panel, String labelText) {

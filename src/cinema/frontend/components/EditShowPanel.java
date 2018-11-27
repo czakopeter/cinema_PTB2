@@ -21,7 +21,7 @@ import javax.swing.JTextField;
  */
 public class EditShowPanel extends JPanel{
   
-  private JTabbedPane tabbedPane;
+  private final JTabbedPane tabbedPane;
   
   private JComboBox filmComboBox, roomComboBox;
   private JTextField startDate, startTime;

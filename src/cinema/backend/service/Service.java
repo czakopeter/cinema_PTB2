@@ -28,5 +28,5 @@ public interface Service {
 
   public Room getRoom(String roomName);
 
-  public List<Seats> listSeatsByShowId(Long showId);
+  public Seats listSeatsByShowId(Long showId);
 }

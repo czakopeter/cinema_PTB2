@@ -28,8 +28,8 @@ public class GuiManager {
       return service.getFilm(Long.valueOf(filmId));
     }
     
-    public static Show getShow(Long showId) {
-      return service.getShow(String.valueOf(showId));
+    public static Show getShow(String showId) {
+      return service.getShow(showId);
     }
     
     public static List<Film> listAllFilms() {
@@ -76,7 +76,7 @@ public class GuiManager {
     return service.getRoom(roomName);
   }
 
-  public static List<Seats> getSeatsByShow(String showId) {
+  public static Seats getSeatsByShow(String showId) {
     return service.listSeatsByShowId(Long.valueOf(showId));
   }
 }
