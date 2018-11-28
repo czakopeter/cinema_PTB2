@@ -11,7 +11,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import javax.swing.ListSelectionModel;
-import javax.swing.table.TableColumn;
 
 /**
  *

@@ -16,6 +16,8 @@ import javax.swing.JTabbedPane;
  */
 public class DashboardWindow extends JFrame {
     private static JTabbedPane tabbedPane;
+    FilmPanel filmListPanel;
+    ShowPanel showListPanel;
     
     public DashboardWindow() {
         initScreen();
@@ -32,8 +34,8 @@ public class DashboardWindow extends JFrame {
     
   private void initTabbedPanel() {
     tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-    JPanel filmListPanel = new FilmPanel();
-    JPanel showListPanel = new ShowPanel(this);
+    filmListPanel = new FilmPanel();
+    showListPanel = new ShowPanel(this);
 
     tabbedPane.addTab("Films list", filmListPanel);
     tabbedPane.addTab("Show list", showListPanel);
@@ -58,5 +60,9 @@ public class DashboardWindow extends JFrame {
     tabbedPane.addTab("Booking tab", bp);
     tabbedPane.setEnabled(false);
     tabbedPane.setSelectedIndex(tabbedPane.getTabCount()-1);
+  }
+  
+  public void refreshShowPanel() {
+    showListPanel.refreshTable();
   }
 }

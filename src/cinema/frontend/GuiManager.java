@@ -66,6 +66,7 @@ public class GuiManager {
     
     public static void modifyBooking(Seats seats) {
       service.modifySeatsStatus(seats);
+      screen.refreshShowPanel();
     }
 /*    
     public static void deleteShow(String showId) {
@@ -77,7 +78,7 @@ public class GuiManager {
     return service.getRoom(roomName);
   }
 
-  public static Seats getSeatsByShow(String showId) {
-    return service.listSeatsByShowId(Long.valueOf(showId));
+  public static Seats getSeatsByShow(Long showId) {
+    return service.listSeatsByShowId(showId);
   }
 }

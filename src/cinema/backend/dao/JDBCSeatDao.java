@@ -99,6 +99,22 @@ public class JDBCSeatDao implements SeatDao {
 
   @Override
   public void update(Seats seats) {
-    
+    String sql = "UPDATE \"USERNAME\".\"seats\" SET showId=?, roomName=?, seatsStatus=? WHERE seatsId=?";
+    try (PreparedStatement statement = createPreparedStatementForUpdate(con, sql, seats);) {
+      statement.executeUpdate();
+    } catch (SQLException ex) {
+      Logger.getLogger(JDBCSeatDao.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  }
+
+  private PreparedStatement createPreparedStatementForUpdate(Connection con, String sql, Seats seats) throws SQLException{
+    PreparedStatement statement = con.prepareStatement(sql);
+
+    statement.setLong(1, seats.getShowId());
+    statement.setString(2, seats.getRoomName());
+    statement.setString(3, seats.getSeatsStatus());
+    statement.setLong(4, seats.getSeatId());
+
+  return statement;
   }
 }

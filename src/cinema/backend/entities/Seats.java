@@ -9,6 +9,7 @@ public class Seats{
     private long showId;
     private String roomName;
     private String seatsStatus;
+    private int emptySeat;
 
     public long getSeatId() {
         return seatId;
@@ -40,6 +41,7 @@ public class Seats{
 
     public void setSeatsStatus(String seatsStatus) {
         this.seatsStatus = seatsStatus;
+        setEmptySeat();
     }
     
     public Object[] toArray() {
@@ -55,4 +57,17 @@ public class Seats{
     public String toString() {
         return "Seat{" + "seatId=" + seatId + ", showId=" + showId + ", roomName=" + roomName + ", seatsStatus=" + seatsStatus + '}';
     }
+
+  private void setEmptySeat() {
+    emptySeat = 0;
+    for(char ch : seatsStatus.toCharArray()) {
+      if(ch == 'A') {
+        emptySeat++;
+      }
+    }
+  }
+  
+  public int getEmptySeat() {
+    return emptySeat;
+  }
 }

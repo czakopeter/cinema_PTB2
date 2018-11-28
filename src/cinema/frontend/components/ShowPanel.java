@@ -101,7 +101,7 @@ public class ShowPanel extends JPanel{
       row.getStartDate() + " " + row.getStartTime(),
       GuiManager.getFilm(Long.toString(row.getFilmId())).getTitle(),
       row.getRoomName(),
-      GuiManager.getEmptySeatForShow(Long.toString(row.getShowId()))};
+      GuiManager.getSeatsByShow(row.getShowId()).getEmptySeat()};
     return array;
   }
 
@@ -167,5 +167,9 @@ public class ShowPanel extends JPanel{
   private void resetFilter(ActionEvent event) {
     filmComboBox.setSelectedIndex(0);
     roomComboBox.setSelectedIndex(0);
+  }
+  
+  public void refreshTable() {
+    addContentToTable(GuiManager.listAllShows());
   }
 }
