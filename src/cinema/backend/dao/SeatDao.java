@@ -11,4 +11,6 @@ public interface SeatDao extends CRUDDao<Seats, Long>{
   Seats findByShowId(Long showId);
 
   public void update(Seats seats);
+
+  public void save(Seats seat);
 }

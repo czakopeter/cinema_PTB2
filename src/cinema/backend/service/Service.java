@@ -4,6 +4,8 @@ import cinema.backend.entities.Film;
 import cinema.backend.entities.Room;
 import cinema.backend.entities.Seats;
 import cinema.backend.entities.Show;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -32,7 +34,7 @@ public interface Service {
 
   public void modifySeatsStatus(Seats seats);
 
-  public void saveShow(Long filmId, String roomName, String startDate, String startTime);
+  public void saveShow(Long filmId, String roomName, LocalDate startDate, LocalTime startTime);
 
-  public void updateShow(Long showId, Long filmId, String roomName, String startDate, String startTime);
+  public void updateShow(Long showId, Long filmId, String roomName, LocalDate startDate, LocalTime startTime);
 }

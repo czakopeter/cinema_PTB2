@@ -7,6 +7,8 @@ import cinema.backend.entities.Show;
 import cinema.backend.service.DaoService;
 import cinema.backend.service.Service;
 import cinema.frontend.windows.DashboardWindow;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -46,11 +48,11 @@ public class GuiManager {
     }
     
     public static void saveShow(Long filmId, String roomName, String startDate, String startTime) {
-      service.saveShow(filmId, roomName, startDate, startTime);
+      service.saveShow(filmId, roomName, LocalDate.parse(startDate), LocalTime.parse(startTime));
     }
     
     public static void updateShow(long showId, Long filmId, String roomName, String startDate, String startTime) {
-      service.updateShow(showId, filmId, roomName, startDate, startTime);
+      service.updateShow(showId, filmId, roomName, LocalDate.parse(startDate), LocalTime.parse(startTime));
     }
     
     public static void deleteShow(Long showId) {

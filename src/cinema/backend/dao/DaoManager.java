@@ -114,15 +114,25 @@ public class DaoManager {
     close();
   }
   
-  public void saveShow(Long filmId, String roomName, String startDate, String startTime) {
+  public void saveShow(Show show) {
     open();
     showDao.setCon(con);
-    showDao.save()
+    showDao.save(show);
     close();
   }
 
-  public void saveShow(Long showId, Long filmId, String roomName, String startDate, String startTime) {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  public void updateShow(Show show) {
+    open();
+    showDao.setCon(con);
+    showDao.update(show);
+    close();
+  }
+  
+  public void saveSeats(Seats seat) {
+    open();
+    seatDao.setCon(con);
+    seatDao.save(seat);
+    close();
   }
   
   private void open() {

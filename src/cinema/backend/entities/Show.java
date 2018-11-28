@@ -10,9 +10,9 @@ import java.time.LocalTime;
 public class Show{
     private long showId;
     private long filmId;
+    private String roomName;
     private LocalDate startDate;
     private LocalTime startTime;
-    private String roomName;
 
     public long getShowId() {
         return showId;

@@ -2,10 +2,11 @@ package cinema.backend.dao;
 
 import cinema.backend.entities.Show;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
+import java.sql.Time;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -25,6 +26,18 @@ public class JDBCShowDao implements ShowDao {
   @Override
   public void setCon(Connection con) {
     this.con = con;
+  }
+  
+  @Override
+  public void delete(long key) {
+    String sql = "DELETE FROM \"USERNAME\".\"show\" WHERE showId = ?";
+    
+    try (PreparedStatement statement = con.prepareStatement(sql)) {
+      statement.setLong(1, key);
+      statement.executeUpdate();
+    } catch (SQLException ex) {
+        Logger.getLogger(JDBCShowDao.class.getName()).log(Level.SEVERE, null, ex);
+    }
   }
 
     @Override
@@ -68,8 +81,8 @@ public class JDBCShowDao implements ShowDao {
         show.setShowId(resultSet.getLong("showId"));
         show.setFilmId(resultSet.getLong("filmId"));
         show.setRoomName(resultSet.getString("roomName"));
-        show.setStartDate(resultSet.getDate("startAtDate").toLocalDate());
-        show.setStartTime(resultSet.getTime("startAtTime").toLocalTime());
+        show.setStartDate(resultSet.getDate("startDate").toLocalDate());
+        show.setStartTime(resultSet.getTime("startTime").toLocalTime());
         return  show;
     }
     
@@ -123,5 +136,49 @@ public class JDBCShowDao implements ShowDao {
             Logger.getLogger(JDBCShowDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+  }
+
+  @Override
+  public void save(Show show) {
+    String sql = "INSERT INTO \"USERNAME\".\"show\" (filmId, roomName, startDate, startTime) VALUES (?, ?, ?, ?)";
+    
+    try (PreparedStatement statement = createPreparedStatementForSave(con, sql, show);) {
+      statement.executeUpdate();
+    } catch (SQLException ex) {
+        Logger.getLogger(JDBCShowDao.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  }
+  
+  private PreparedStatement createPreparedStatementForSave(Connection con, String sql, Show show) throws SQLException{
+    PreparedStatement statement = con.prepareStatement(sql);
+    
+    statement.setLong(1, show.getFilmId());
+    statement.setString(2, show.getRoomName());
+    statement.setDate(3, Date.valueOf(show.getStartDate()));
+    statement.setTime(4, Time.valueOf(show.getStartTime()));
+    
+    return statement;
+  }
+
+  @Override
+  public void update(Show show) {
+    String sql = "UPDATE \"USERNAME\".\"show\" SET filmId=?, roomName=?, startDate=?, startTime=? WHERE showId=?";
+    try (PreparedStatement statement = createPreparedStatementForUpdate(con, sql, show);) {
+      statement.executeUpdate();
+    } catch (SQLException ex) {
+      Logger.getLogger(JDBCSeatDao.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  }
+
+  private PreparedStatement createPreparedStatementForUpdate(Connection con, String sql, Show show) throws SQLException{
+    PreparedStatement statement = con.prepareStatement(sql);
+
+    statement.setLong(1, show.getFilmId());
+    statement.setString(2, show.getRoomName());
+    statement.setDate(3, Date.valueOf(show.getStartDate()));
+    statement.setTime(4, Time.valueOf(show.getStartTime()));
+    statement.setLong(5, show.getShowId());
+    
+    return statement;
   }
 }

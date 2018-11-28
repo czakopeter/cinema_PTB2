@@ -117,4 +117,25 @@ public class JDBCSeatDao implements SeatDao {
 
   return statement;
   }
+
+  @Override
+  public void save(Seats seat) {
+    String sql = "INSERT INTO \"USERNAME\".\"seats\" (showId, roomName, seatsStatus) VALUES (?, ?, ?)";
+    
+    try (PreparedStatement statement = createPreparedStatementForSave(con, sql, seat);) {
+      statement.executeUpdate();
+    } catch (SQLException ex) {
+        Logger.getLogger(JDBCSeatDao.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  }
+
+  private PreparedStatement createPreparedStatementForSave(Connection con, String sql, Seats seat) throws SQLException{
+    PreparedStatement statement = con.prepareStatement(sql);
+    
+    statement.setLong(1, seat.getShowId());
+    statement.setString(2, seat.getRoomName());
+    statement.setString(3, seat.getSeatsStatus());
+    
+    return statement;
+  }
 }

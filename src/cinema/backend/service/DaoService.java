@@ -5,6 +5,8 @@ import cinema.backend.entities.Film;
 import cinema.backend.entities.Room;
 import cinema.backend.entities.Seats;
 import cinema.backend.entities.Show;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -64,19 +66,34 @@ public class DaoService implements Service {
   public void modifySeatsStatus(Seats seats) {
     dm.modifySeatsStatus(seats);
   }
+  
+  private void saveSeats(Show show) {
+    Seats seat = new Seats();
+    seat.setShowId(show.getShowId());
+    seat.setRoomName(show.getRoomName());
+    seat.setSeatsStatus("");
+    dm.saveSeats(seat);
+  }
 
   @Override
-  public void saveShow(Long filmId, String roomName,  startDate, String startTime) {
+  public void saveShow(Long filmId, String roomName, LocalDate startDate, LocalTime startTime) {
     Show show = new Show();
     show.setFilmId(filmId);
     show.setRoomName(roomName);
     show.setStartDate(startDate);
     show.setStartTime(startTime);
-    dm.saveShow(filmId, roomName, startDate, startTime);
+    dm.saveShow(show);
+    saveSeats(show);
   }
 
   @Override
-  public void updateShow(Long showId, Long filmId, String roomName, String startDate, String startTime) {
-    dm.saveShow(showId, filmId, roomName, startDate, startTime);
+  public void updateShow(Long showId, Long filmId, String roomName, LocalDate startDate, LocalTime startTime) {
+    Show show = new Show();
+    show.setShowId(showId);
+    show.setFilmId(filmId);
+    show.setRoomName(roomName);
+    show.setStartDate(startDate);
+    show.setStartTime(startTime);
+    dm.updateShow(show);
   }
 }
