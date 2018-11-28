@@ -1,16 +1,17 @@
 package cinema.frontend.components;
 
+import cinema.backend.entities.Film;
 import cinema.backend.entities.Show;
 import cinema.frontend.GuiManager;
 import cinema.frontend.components.factory.SwingComponentFactory;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
@@ -24,6 +25,7 @@ public class EditShowPanel extends JPanel{
   private final JTabbedPane tabbedPane;
   
   private JComboBox filmComboBox, roomComboBox;
+  private static List<Long> listFilmFilterId;
   private JTextField startDate, startTime;
   private JButton addNewShowButton, cancelButton;
   
@@ -37,7 +39,8 @@ public class EditShowPanel extends JPanel{
   public EditShowPanel(JTabbedPane tp, String showId) {
     tabbedPane = tp;
     initNewShowPanel();
-    setPanelComponents(GuiManager.getShow(showId));
+    show = GuiManager.getShow(showId);
+    setPanelComponents(show);
   }
   
   private void initNewShowPanel() {
@@ -51,10 +54,18 @@ public class EditShowPanel extends JPanel{
     JPanel inputPanel = new JPanel();
     inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.Y_AXIS));
     
+    listFilmFilterId = new ArrayList<>();
     filmComboBox = SwingComponentFactory.createComboBox(inputPanel, "Select film");
+    for(Film film : GuiManager.listAllFilms()) {
+      listFilmFilterId.add(film.getFilmId());
+      filmComboBox.addItem(film.getTitle());
+    }
+    
     roomComboBox = SwingComponentFactory.createComboBox(inputPanel, "Select room");
+    GuiManager.listAllRooms().forEach(room -> roomComboBox.addItem(room.getRoomName()));
+    
     startDate = SwingComponentFactory.createTextField(inputPanel, "Date");
-    startDate = SwingComponentFactory.createTextField(inputPanel, "Time");
+    startTime = SwingComponentFactory.createTextField(inputPanel, "Time");
     
     add(inputPanel, BorderLayout.NORTH);
   }
@@ -71,11 +82,18 @@ public class EditShowPanel extends JPanel{
   }
   
   private void setPanelComponents(Show show) {
-    
+    filmComboBox.setSelectedIndex(listFilmFilterId.indexOf(show.getFilmId()+1));
+    roomComboBox.setSelectedItem(show.getRoomName());
+    startDate.setText(show.getStartDate().toString());
+    startTime.setText(show.getStartTime().toString());
   }
   
   private void addShow(ActionEvent event) {
-    
+    GuiManager.addNewShow(
+            listFilmFilterId.get(filmComboBox.getSelectedIndex()),
+            roomComboBox.getSelectedItem().toString(),
+            startDate.getText(), 
+            startTime.getText());
   }
   
   private void cancel(ActionEvent event) {

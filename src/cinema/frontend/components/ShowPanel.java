@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ShowPanel extends JPanel{
   private final static Object[] SHOW_COLUMN_NAMES = new Object[]{"Datetime", "Title", "Room", "Available seat"};
-  private static List<String> listFilmFilterId;
+  private static List<Long> listFilmFilterId;
   private static List<String> listShowTableId;
   
   private final DashboardWindow screen;
@@ -52,7 +52,7 @@ public class ShowPanel extends JPanel{
     listFilmFilterId = new ArrayList<>();
     filmComboBox = SwingComponentFactory.createComboBox(filterPanel, "Film filter");
     for(Film film : GuiManager.listAllFilms()) {
-      listFilmFilterId.add(Long.toString(film.getFilmId()));
+      listFilmFilterId.add(film.getFilmId());
       filmComboBox.addItem(film.getTitle());
     }
     filmComboBox.addActionListener(this::filmFilterSelect);
@@ -146,7 +146,6 @@ public class ShowPanel extends JPanel{
   private void filmFilterSelect(ActionEvent event) {
     if(filmComboBox.getSelectedIndex() != 0) {
       roomComboBox.setSelectedIndex(0);
-      System.out.println(filmComboBox.getSelectedIndex());
       addContentToTable(GuiManager.listShowsByFilmId(listFilmFilterId.get(filmComboBox.getSelectedIndex()-1)));
     }
     else if(roomComboBox.getSelectedIndex() == 0){

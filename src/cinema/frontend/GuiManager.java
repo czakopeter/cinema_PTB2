@@ -7,6 +7,7 @@ import cinema.backend.entities.Show;
 import cinema.backend.service.DaoService;
 import cinema.backend.service.Service;
 import cinema.frontend.windows.DashboardWindow;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -44,35 +45,26 @@ public class GuiManager {
       return service.listAllRooms();
     }
     
-    public static void addNewShow(String filmId, String datetime, String roomName) {
+    public static void addNewShow(Long filmId, String roomName, String startDate, String startTime) {
       
     }
     
-    public static List<Show> listShowsByFilmId(String filmId) {
-      return service.listShowsByFilmId(Long.valueOf(filmId));
+    public static void deleteShow(Long showId) {
+        
+    }
+    
+    public static List<Show> listShowsByFilmId(Long filmId) {
+      return service.listShowsByFilmId(filmId);
     }
     
     public static List<Show> listShowsByRoom(String roomName) {
       return service.listShowsByRoom(roomName);
     }
     
-    public static int getSoldTicketsForFilm(String filmId) {
-      return 0;
-    }
-    
-    public static int getEmptySeatForShow(String showId) {
-      return 0;
-    }
-    
     public static void modifyBooking(Seats seats) {
       service.modifySeatsStatus(seats);
-      screen.refreshShowPanel();
+      screen.refreshListOfFilmAndShowPanel();
     }
-/*    
-    public static void deleteShow(String showId) {
-        
-    }
-*/
 
   public static Room getRoom(String roomName) {
     return service.getRoom(roomName);
@@ -80,5 +72,12 @@ public class GuiManager {
 
   public static Seats getSeatsByShow(Long showId) {
     return service.listSeatsByShowId(showId);
+  }
+  
+  public static List<Seats> getSeatsByFilm(Long filmId) {
+    List<Seats> seats  = new LinkedList<>();
+    List<Show> shows = listShowsByFilmId(filmId);
+    shows.forEach(show -> seats.add(getSeatsByShow(show.getShowId())));
+    return seats;
   }
 }

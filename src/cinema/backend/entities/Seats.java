@@ -10,6 +10,7 @@ public class Seats{
     private String roomName;
     private String seatsStatus;
     private int emptySeat;
+    private int soldTicket;
 
     public long getSeatId() {
         return seatId;
@@ -41,7 +42,7 @@ public class Seats{
 
     public void setSeatsStatus(String seatsStatus) {
         this.seatsStatus = seatsStatus;
-        setEmptySeat();
+        setEmptySeatAndSoldTicket();
     }
     
     public Object[] toArray() {
@@ -58,16 +59,23 @@ public class Seats{
         return "Seat{" + "seatId=" + seatId + ", showId=" + showId + ", roomName=" + roomName + ", seatsStatus=" + seatsStatus + '}';
     }
 
-  private void setEmptySeat() {
+  private void setEmptySeatAndSoldTicket() {
     emptySeat = 0;
+    soldTicket = 0;
     for(char ch : seatsStatus.toCharArray()) {
       if(ch == 'A') {
         emptySeat++;
+      } else if(ch == 'O') {
+        soldTicket++;
       }
     }
   }
   
   public int getEmptySeat() {
     return emptySeat;
+  }
+  
+  public int getSoldTicket() {
+    return  soldTicket;
   }
 }

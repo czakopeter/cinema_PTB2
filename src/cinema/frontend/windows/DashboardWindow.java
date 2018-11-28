@@ -1,13 +1,11 @@
 package cinema.frontend.windows;
 
 
-import cinema.frontend.GuiManager;
 import cinema.frontend.components.BookingPanel;
 import cinema.frontend.components.FilmPanel;
 import cinema.frontend.components.EditShowPanel;
 import cinema.frontend.components.ShowPanel;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 /**
@@ -62,7 +60,8 @@ public class DashboardWindow extends JFrame {
     tabbedPane.setSelectedIndex(tabbedPane.getTabCount()-1);
   }
   
-  public void refreshShowPanel() {
+  public void refreshListOfFilmAndShowPanel() {
     showListPanel.refreshTable();
+    filmListPanel.refreshTable();
   }
 }

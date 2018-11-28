@@ -1,6 +1,7 @@
 package cinema.frontend.components;
 
 import cinema.backend.entities.Film;
+import cinema.backend.entities.Seats;
 import cinema.frontend.GuiManager;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import javax.swing.ListSelectionModel;
+import jdk.nashorn.internal.objects.NativeArray;
 
 /**
  *
@@ -58,12 +60,17 @@ public class FilmPanel extends JPanel {
   }
   
   private Object[] displayedFilmData(Film film) {
+    int soldTicket = 0;
+    for(Seats seat : GuiManager.getSeatsByFilm(film.getFilmId())) {
+      soldTicket+=seat.getSoldTicket();
+    }
       Object[] array = {
         film.getTitle(),
         film.getSynconized().name(),
         Integer.toString(film.getRuntime()),
         film.getAgeLimit(),
-        GuiManager.getSoldTicketsForFilm(Long.toString(film.getFilmId()))};
+        Integer.toString(soldTicket)
+      };
       return array;
   }
   
@@ -77,5 +84,9 @@ public class FilmPanel extends JPanel {
   private void initDetailsPanel() {
     detailsPanel = new FilmDetailsPanel();
     add(detailsPanel, BorderLayout.SOUTH); 
+  }
+
+  public void refreshTable() {
+    addContentToTable(GuiManager.listAllFilms());
   }
 }
