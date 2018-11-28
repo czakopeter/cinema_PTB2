@@ -64,4 +64,19 @@ public class DaoService implements Service {
   public void modifySeatsStatus(Seats seats) {
     dm.modifySeatsStatus(seats);
   }
+
+  @Override
+  public void saveShow(Long filmId, String roomName,  startDate, String startTime) {
+    Show show = new Show();
+    show.setFilmId(filmId);
+    show.setRoomName(roomName);
+    show.setStartDate(startDate);
+    show.setStartTime(startTime);
+    dm.saveShow(filmId, roomName, startDate, startTime);
+  }
+
+  @Override
+  public void updateShow(Long showId, Long filmId, String roomName, String startDate, String startTime) {
+    dm.saveShow(showId, filmId, roomName, startDate, startTime);
+  }
 }

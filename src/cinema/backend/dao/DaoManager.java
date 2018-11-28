@@ -114,6 +114,17 @@ public class DaoManager {
     close();
   }
   
+  public void saveShow(Long filmId, String roomName, String startDate, String startTime) {
+    open();
+    showDao.setCon(con);
+    showDao.save()
+    close();
+  }
+
+  public void saveShow(Long showId, Long filmId, String roomName, String startDate, String startTime) {
+    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  }
+  
   private void open() {
     try {
       DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());

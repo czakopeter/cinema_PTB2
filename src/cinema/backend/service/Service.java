@@ -31,4 +31,8 @@ public interface Service {
   public Seats listSeatsByShowId(Long showId);
 
   public void modifySeatsStatus(Seats seats);
+
+  public void saveShow(Long filmId, String roomName, String startDate, String startTime);
+
+  public void updateShow(Long showId, Long filmId, String roomName, String startDate, String startTime);
 }

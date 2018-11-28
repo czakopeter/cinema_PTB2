@@ -27,7 +27,7 @@ public class EditShowPanel extends JPanel{
   private JComboBox filmComboBox, roomComboBox;
   private static List<Long> listFilmFilterId;
   private JTextField startDate, startTime;
-  private JButton addNewShowButton, cancelButton;
+  private JButton saveShowButton, cancelButton;
   
   private Show show;
 
@@ -72,8 +72,8 @@ public class EditShowPanel extends JPanel{
 
   private void initButtonsPanel() {
     JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
-    addNewShowButton = SwingComponentFactory.createButton(buttonsPanel, "Add show");
-    addNewShowButton.addActionListener(this::addShow);
+    saveShowButton = SwingComponentFactory.createButton(buttonsPanel, "Save show");
+    saveShowButton.addActionListener(this::saveShow);
     
     cancelButton = SwingComponentFactory.createButton(buttonsPanel, "Cancel");
     cancelButton.addActionListener(this::cancel);
@@ -88,8 +88,24 @@ public class EditShowPanel extends JPanel{
     startTime.setText(show.getStartTime().toString());
   }
   
-  private void addShow(ActionEvent event) {
-    GuiManager.addNewShow(
+  private void saveShow(ActionEvent event) {
+    if(show == null) {
+      saveNewShow();
+    } else {
+      modifyShow();
+    }
+  }
+  private void saveNewShow() {
+    GuiManager.saveShow(
+          listFilmFilterId.get(filmComboBox.getSelectedIndex()),
+          roomComboBox.getSelectedItem().toString(),
+          startDate.getText(), 
+          startTime.getText());
+  }
+  
+  private void modifyShow() {
+    GuiManager.updateShow(
+            show.getShowId(),
             listFilmFilterId.get(filmComboBox.getSelectedIndex()),
             roomComboBox.getSelectedItem().toString(),
             startDate.getText(), 
