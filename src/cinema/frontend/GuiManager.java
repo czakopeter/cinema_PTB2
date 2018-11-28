@@ -65,6 +65,7 @@ public class GuiManager {
     }
     
     public static void modifyBooking(Seats seats) {
+      service.modifySeatsStatus(seats);
     }
 /*    
     public static void deleteShow(String showId) {

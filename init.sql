@@ -151,7 +151,7 @@ INSERT INTO "USERNAME"."seats" (showId, roomName, seatsStatus) VALUES
 	),
 	(2,
 	'Batcave',
-	'OOOOAAAAOOO'
+	'OOOOAAAAOOOO'
 	),
 	(3,
 	'Stargate',

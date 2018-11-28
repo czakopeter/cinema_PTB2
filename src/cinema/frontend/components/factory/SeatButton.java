@@ -49,6 +49,7 @@ public class SeatButton extends JButton {
     } else if (st == 'O') {
       statudIdx = 0;
     }
+    this.setBackground(status[statudIdx]);
   }
   
   public Color changeStatus() {

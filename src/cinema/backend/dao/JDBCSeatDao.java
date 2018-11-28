@@ -96,4 +96,9 @@ public class JDBCSeatDao implements SeatDao {
     }
     return null;
   }
+
+  @Override
+  public void update(Seats seats) {
+    
+  }
 }

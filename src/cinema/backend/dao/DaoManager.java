@@ -107,6 +107,13 @@ public class DaoManager {
     return show;
   }
   
+  public void modifySeatsStatus(Seats seats) {
+    open();
+    seatDao.setCon(con);
+    seatDao.update(seats);
+    close();
+  }
+  
   private void open() {
     try {
       DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());

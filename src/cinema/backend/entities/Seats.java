@@ -39,7 +39,7 @@ public class Seats{
     }
 
     public void setSeatsStatus(String seatsStatus) {
-        //
+        this.seatsStatus = seatsStatus;
     }
     
     public Object[] toArray() {

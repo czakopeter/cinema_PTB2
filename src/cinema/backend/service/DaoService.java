@@ -59,4 +59,9 @@ public class DaoService implements Service {
   public Seats listSeatsByShowId(Long showId) {
     return dm.listSeatsByShowId(showId);
   }
+
+  @Override
+  public void modifySeatsStatus(Seats seats) {
+    dm.modifySeatsStatus(seats);
+  }
 }

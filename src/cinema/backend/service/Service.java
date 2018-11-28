@@ -29,4 +29,6 @@ public interface Service {
   public Room getRoom(String roomName);
 
   public Seats listSeatsByShowId(Long showId);
+
+  public void modifySeatsStatus(Seats seats);
 }

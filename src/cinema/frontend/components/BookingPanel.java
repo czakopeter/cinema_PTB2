@@ -30,13 +30,13 @@ public class BookingPanel extends JPanel {
   private final JTabbedPane tabbedPane;
   private JButton saveButton, dropButton, cancelButton;
   private JPanel seatsPanel;
-  private Seats seats;
+  private final Seats seats;
   private int rowLength;
   
   public BookingPanel(JTabbedPane tp, String filmId) {
     tabbedPane = tp;
     this.seats = GuiManager.getSeatsByShow(filmId);
-    
+    System.out.println(seats);
     initBookingpanel();
   }
   
@@ -64,7 +64,7 @@ public class BookingPanel extends JPanel {
   private String getInfo() {
     Show show = GuiManager.getShow(Long.toString(seats.getShowId()));
     return GuiManager.getFilm(Long.toString(show.getFilmId())).getTitle() +
-           "\t" + show.getStartDate().toString() + 
+           "    " + show.getStartDate().toString() + 
            " " + show.getStartTime().toString();
   }
   
@@ -88,7 +88,6 @@ public class BookingPanel extends JPanel {
         seatsPanel.add(sb);
       }
     }
-    seatsPanel.revalidate();
   }
   
   private void setSeatsButton() {
@@ -134,9 +133,9 @@ public class BookingPanel extends JPanel {
   }
 
   private void setSeatsState() {
-    SeatButton[] buttonArray = (SeatButton[])seatsPanel.getComponents();
     char[] chSeats = seats.getSeatsStatus().toCharArray();
-    for(SeatButton sb : buttonArray) {
+    for(Component component : seatsPanel.getComponents()) {
+      SeatButton sb = (SeatButton) component;
       chSeats[sb.getRow()*rowLength + sb.getColumn()] = sb.getSeatStatus();
     }
     seats.setSeatsStatus(Arrays.toString(chSeats));
