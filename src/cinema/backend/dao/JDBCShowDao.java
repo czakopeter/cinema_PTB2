@@ -149,7 +149,7 @@ public class JDBCShowDao implements ShowDao {
         show.setShowId(generatedKey.getLong(1));
         return show;
       } else {
-        throw new SQLException("show create failed");
+        throw new SQLException("create show failed");
       }
     } catch (SQLException ex) {
         Logger.getLogger(JDBCShowDao.class.getName()).log(Level.SEVERE, null, ex);

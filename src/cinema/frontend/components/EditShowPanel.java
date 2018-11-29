@@ -58,6 +58,7 @@ public class EditShowPanel extends JPanel{
     filmComboBox = SwingComponentFactory.createComboBox(inputPanel, "Select film");
     for(Film film : GuiManager.listAllFilms()) {
       listFilmFilterId.add(film.getFilmId());
+      System.out.println(listFilmFilterId.size() + "   " + film.getFilmId());
       filmComboBox.addItem(film.getTitle());
     }
     
@@ -82,7 +83,7 @@ public class EditShowPanel extends JPanel{
   }
   
   private void setPanelComponents(Show show) {
-    filmComboBox.setSelectedIndex(listFilmFilterId.indexOf(show.getFilmId()+1));
+    filmComboBox.setSelectedIndex(listFilmFilterId.indexOf(show.getFilmId()));
     roomComboBox.setSelectedItem(show.getRoomName());
     startDate.setText(show.getStartDate().toString());
     startTime.setText(show.getStartTime().toString());

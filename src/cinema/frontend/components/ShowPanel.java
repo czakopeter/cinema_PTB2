@@ -55,10 +55,12 @@ public class ShowPanel extends JPanel{
       listFilmFilterId.add(film.getFilmId());
       filmComboBox.addItem(film.getTitle());
     }
+    filmComboBox.setSelectedIndex(-1);
     filmComboBox.addActionListener(this::filmFilterSelect);
     
     roomComboBox = SwingComponentFactory.createComboBox(filterPanel, "Room filter");
     GuiManager.listAllRooms().forEach(room -> roomComboBox.addItem(room.getRoomName()));
+    roomComboBox.setSelectedIndex(-1);
     roomComboBox.addActionListener(this::roomFilterSelect);
     
     resetFilterButton = SwingComponentFactory.createButton(filterPanel, "Reset filter");
@@ -144,28 +146,23 @@ public class ShowPanel extends JPanel{
   }
   
   private void filmFilterSelect(ActionEvent event) {
-    if(filmComboBox.getSelectedIndex() != 0) {
-      roomComboBox.setSelectedIndex(0);
-      addContentToTable(GuiManager.listShowsByFilmId(listFilmFilterId.get(filmComboBox.getSelectedIndex()-1)));
-    }
-    else if(roomComboBox.getSelectedIndex() == 0){
-      addContentToTable(GuiManager.listAllShows());
+    if(filmComboBox.getSelectedIndex() != -1) {
+      roomComboBox.setSelectedIndex(-1);
+      addContentToTable(GuiManager.listShowsByFilmId(listFilmFilterId.get(filmComboBox.getSelectedIndex())));
     }
   }
   
   private void roomFilterSelect(ActionEvent event) {
-    if(roomComboBox.getSelectedIndex() != 0) {
-      filmComboBox.setSelectedIndex(0);
+    if(roomComboBox.getSelectedIndex() != -1) {
+      filmComboBox.setSelectedIndex(-1);
       addContentToTable(GuiManager.listShowsByRoom(roomComboBox.getSelectedItem().toString()));
-    }
-    else if(filmComboBox.getSelectedIndex() == 0) {
-      addContentToTable(GuiManager.listAllShows());
     }
   }
   
   private void resetFilter(ActionEvent event) {
-    filmComboBox.setSelectedIndex(0);
-    roomComboBox.setSelectedIndex(0);
+    filmComboBox.setSelectedIndex(-1);
+    roomComboBox.setSelectedIndex(-1);
+    refreshTable();
   }
   
   public void refreshTable() {

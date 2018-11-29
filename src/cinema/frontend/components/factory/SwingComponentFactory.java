@@ -23,7 +23,6 @@ public final class SwingComponentFactory {
     
     public static JComboBox createComboBox(JPanel panel, String labelText) {
       JComboBox comboBox = new JComboBox();
-      comboBox.addItem("");
       JLabel label = new JLabel(labelText);
       panel.add(label);
       panel.add(comboBox);
