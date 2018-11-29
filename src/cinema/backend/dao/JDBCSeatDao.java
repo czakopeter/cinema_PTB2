@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -130,7 +131,7 @@ public class JDBCSeatDao implements SeatDao {
   }
 
   private PreparedStatement createPreparedStatementForSave(Connection con, String sql, Seats seat) throws SQLException{
-    PreparedStatement statement = con.prepareStatement(sql);
+    PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
     
     statement.setLong(1, seat.getShowId());
     statement.setString(2, seat.getRoomName());

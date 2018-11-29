@@ -29,7 +29,7 @@ public class Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception{
-      initDB();
+//      initDB();
       GuiManager.start();
     }
         private static void initDB() throws Exception {

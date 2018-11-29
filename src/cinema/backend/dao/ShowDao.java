@@ -13,7 +13,7 @@ public interface ShowDao extends CRUDDao<Show, Long>{
 
   public List<Show> listShowsByRoom(String roomName);
 
-  public void save(Show show);
+  public Show save(Show show);
 
   public void update(Show show);
   

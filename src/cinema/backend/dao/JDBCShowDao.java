@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Time;
 import java.util.LinkedList;
 import java.util.List;
@@ -139,23 +140,32 @@ public class JDBCShowDao implements ShowDao {
   }
 
   @Override
-  public void save(Show show) {
+  public Show save(Show show) {
     String sql = "INSERT INTO \"USERNAME\".\"show\" (filmId, roomName, startDate, startTime) VALUES (?, ?, ?, ?)";
     
-    try (PreparedStatement statement = createPreparedStatementForSave(con, sql, show);) {
-      statement.executeUpdate();
+    try (PreparedStatement statement = createPreparedStatementForSave(con, sql, show);
+            ResultSet generatedKey = statement.getGeneratedKeys();) {
+      if(generatedKey.next()) {
+        show.setShowId(generatedKey.getLong(1));
+        return show;
+      } else {
+        throw new SQLException("show create failed");
+      }
     } catch (SQLException ex) {
         Logger.getLogger(JDBCShowDao.class.getName()).log(Level.SEVERE, null, ex);
     }
+    return null;
   }
   
   private PreparedStatement createPreparedStatementForSave(Connection con, String sql, Show show) throws SQLException{
-    PreparedStatement statement = con.prepareStatement(sql);
+    PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
     
     statement.setLong(1, show.getFilmId());
     statement.setString(2, show.getRoomName());
     statement.setDate(3, Date.valueOf(show.getStartDate()));
     statement.setTime(4, Time.valueOf(show.getStartTime()));
+    
+    statement.executeUpdate();
     
     return statement;
   }

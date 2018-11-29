@@ -68,10 +68,15 @@ public class DaoService implements Service {
   }
   
   private void saveSeats(Show show) {
+    Room room = getRoom(show.getRoomName());
+    String seatStatus = "";
+    for(int i = 0; i<room.getRowNr()*room.getColumnNr(); i++){
+      seatStatus += "A";
+    }
     Seats seat = new Seats();
     seat.setShowId(show.getShowId());
     seat.setRoomName(show.getRoomName());
-    seat.setSeatsStatus("");
+    seat.setSeatsStatus(seatStatus);
     dm.saveSeats(seat);
   }
 
@@ -82,18 +87,36 @@ public class DaoService implements Service {
     show.setRoomName(roomName);
     show.setStartDate(startDate);
     show.setStartTime(startTime);
-    dm.saveShow(show);
+    show = dm.saveShow(show);
     saveSeats(show);
   }
 
   @Override
   public void updateShow(Long showId, Long filmId, String roomName, LocalDate startDate, LocalTime startTime) {
-    Show show = new Show();
-    show.setShowId(showId);
+    System.out.println("Just update");
+    Show show = getShow(Long.toString(showId));
     show.setFilmId(filmId);
-    show.setRoomName(roomName);
     show.setStartDate(startDate);
     show.setStartTime(startTime);
+    if(!roomName.equals(show.getRoomName())) {
+      System.out.println("Room update");
+      System.out.println("old:" + show.getRoomName() + ",new:" + roomName + "#");
+      updateSeats(show.getShowId(), roomName);
+      show.setRoomName(roomName);
+    }
     dm.updateShow(show);
+    
+  }
+
+  private void updateSeats(Long showId, String roomName) {
+    Room room = getRoom(roomName);
+    String seatStatus = "";
+    for(int i = 0; i<room.getRowNr()*room.getColumnNr(); i++){
+      seatStatus += "A";
+    }
+    Seats seat = listSeatsByShowId(showId);
+    seat.setRoomName(roomName);
+    seat.setSeatsStatus(seatStatus);
+    modifySeatsStatus(seat);
   }
 }

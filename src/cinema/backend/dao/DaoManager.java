@@ -114,11 +114,12 @@ public class DaoManager {
     close();
   }
   
-  public void saveShow(Show show) {
+  public Show saveShow(Show show) {
     open();
     showDao.setCon(con);
-    showDao.save(show);
+    show = showDao.save(show);
     close();
+    return show;
   }
 
   public void updateShow(Show show) {

@@ -97,7 +97,7 @@ public class EditShowPanel extends JPanel{
   }
   private void saveNewShow() {
     GuiManager.saveShow(
-          listFilmFilterId.get(filmComboBox.getSelectedIndex()),
+          listFilmFilterId.get(filmComboBox.getSelectedIndex()-1),
           roomComboBox.getSelectedItem().toString(),
           startDate.getText(), 
           startTime.getText());
@@ -106,7 +106,7 @@ public class EditShowPanel extends JPanel{
   private void modifyShow() {
     GuiManager.updateShow(
             show.getShowId(),
-            listFilmFilterId.get(filmComboBox.getSelectedIndex()),
+            listFilmFilterId.get(filmComboBox.getSelectedIndex()-1),
             roomComboBox.getSelectedItem().toString(),
             startDate.getText(), 
             startTime.getText());
@@ -116,5 +116,6 @@ public class EditShowPanel extends JPanel{
     tabbedPane.remove(this);
     tabbedPane.setSelectedIndex(tabbedPane.getTabCount()-1);
     tabbedPane.setEnabled(true);
+    
   }
 }

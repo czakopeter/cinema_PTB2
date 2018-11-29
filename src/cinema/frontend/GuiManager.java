@@ -49,10 +49,12 @@ public class GuiManager {
     
     public static void saveShow(Long filmId, String roomName, String startDate, String startTime) {
       service.saveShow(filmId, roomName, LocalDate.parse(startDate), LocalTime.parse(startTime));
+      screen.refreshListOfFilmAndShowPanel();
     }
     
     public static void updateShow(long showId, Long filmId, String roomName, String startDate, String startTime) {
       service.updateShow(showId, filmId, roomName, LocalDate.parse(startDate), LocalTime.parse(startTime));
+      screen.refreshListOfFilmAndShowPanel();
     }
     
     public static void deleteShow(Long showId) {
