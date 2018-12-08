@@ -12,7 +12,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import javax.swing.ListSelectionModel;
-import jdk.nashorn.internal.objects.NativeArray;
 
 /**
  *
@@ -45,6 +44,7 @@ public class FilmPanel extends JPanel {
     filmTable.setFillsViewportHeight(true);
     this.add(new JScrollPane(filmTable),BorderLayout.CENTER);
     addContentToTable(GuiManager.listAllFilms());
+    filmTable.setRowSelectionInterval(0,0);
   }
   
   public void addContentToTable(List<Film> content) {
@@ -84,6 +84,7 @@ public class FilmPanel extends JPanel {
   private void initDetailsPanel() {
     detailsPanel = new FilmDetailsPanel();
     add(detailsPanel, BorderLayout.SOUTH); 
+    detailsPanel.seDetailsPanelWithtFilm(listFilmTableId.get(0));
   }
 
   public void refreshTable() {

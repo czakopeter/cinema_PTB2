@@ -12,9 +12,6 @@ import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -140,6 +137,7 @@ public class BookingPanel extends JPanel {
       SeatButton sb = (SeatButton) component;
       chSeats[sb.getRow()*rowLength + sb.getColumn()] = sb.getSeatStatus();
     }
+    
     if(seats.getSeatsStatus().equals(String.valueOf(chSeats))) {
       return false;
     }
