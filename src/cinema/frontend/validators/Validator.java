@@ -1,5 +1,6 @@
 package cinema.frontend.validators;
 
+import cinema.backend.entities.Show;
 import cinema.frontend.GuiManager;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -19,6 +20,11 @@ public class Validator {
   private final static String AGE_LIMIT_3_MIN_START_TIME = "21:00";
   
   public static boolean validateShow(Long filmId, String roomName, String startDate, String startTime, JFrame frame) {
+    if(GuiManager.listShowsByFilmId(filmId).size() >= GuiManager.getFilm(filmId).getLicenseToPlay()) {
+      JOptionPane.showMessageDialog(frame, "Ezt a filmet nem lehet tobszor vetiteni");
+      return false;
+    }
+    
     if(startDate.isEmpty() || startTime.isEmpty())
     {
       JOptionPane.showMessageDialog(frame, "Hianyzo parameter");
@@ -44,12 +50,28 @@ public class Validator {
     switch(GuiManager.getFilm(filmId).getAgeLimit())
     {
       case AGE_LIMIT_2:
-        return 0<startTime.compareTo(AGE_LIMIT_2_MIN_START_TIME);
-      case AGE_LIMIT_3:
+        if(0>startTime.compareTo(AGE_LIMIT_2_MIN_START_TIME)) {return false;}
         break;
-          
+      case AGE_LIMIT_3:
+        if(0>startTime.compareTo(AGE_LIMIT_3_MIN_START_TIME)) {return false;}
+        break;
     }
     
+    int runtime = GuiManager.getFilm(filmId).getRuntime();
+    int counter = 0;
+    for(Show show : GuiManager.listShowsByFilmId(filmId)){
+      if(show.getStartDate().equals(LocalDate.parse(startDate)) &&
+        ((LocalTime.parse(startTime).isAfter(show.getStartTime()) &&
+          LocalTime.parse(startTime).isBefore(show.getStartTime().plusMinutes(runtime))) ||
+         (LocalTime.parse(startTime).plusMinutes(runtime).isAfter(show.getStartTime()) &&
+          LocalTime.parse(startTime).plusMinutes(runtime).isBefore(show.getStartTime().plusMinutes(runtime)))))
+      {
+        ++counter;
+        if(counter == 3) {
+          return false;
+        }
+      }
+    }
     return true;
   }
   
