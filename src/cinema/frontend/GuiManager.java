@@ -6,6 +6,7 @@ import cinema.backend.entities.Seats;
 import cinema.backend.entities.Show;
 import cinema.backend.service.DaoService;
 import cinema.backend.service.Service;
+import cinema.frontend.validators.Validator;
 import cinema.frontend.windows.DashboardWindow;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -28,10 +29,12 @@ public class GuiManager {
     
   
     public static Film getFilm(String filmId) {
+      //validate this is long
       return service.getFilm(Long.valueOf(filmId));
     }
     
     public static Show getShow(String showId) {
+      ////validate this is long
       return service.getShow(showId);
     }
     
@@ -48,8 +51,14 @@ public class GuiManager {
     }
     
     public static void saveShow(Long filmId, String roomName, String startDate, String startTime) {
-      service.saveShow(filmId, roomName, LocalDate.parse(startDate), LocalTime.parse(startTime));
-      screen.refreshListOfFilmAndShowPanel();
+      
+      if(Validator.validateShow(filmId, roomName, startDate, startTime, screen)){
+        
+      }
+      else{
+        service.saveShow(filmId, roomName, LocalDate.parse(startDate), LocalTime.parse(startTime));
+        screen.refreshListOfFilmAndShowPanel();
+      }
     }
     
     public static void updateShow(long showId, Long filmId, String roomName, String startDate, String startTime) {
