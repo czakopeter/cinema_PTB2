@@ -33,6 +33,11 @@ public class GuiManager {
       return service.getFilm(Long.valueOf(filmId));
     }
     
+    public static Film getFilm(Long filmId) {
+      //validate this is long
+      return service.getFilm(filmId);
+    }
+    
     public static Show getShow(String showId) {
       ////validate this is long
       return service.getShow(showId);
@@ -53,9 +58,6 @@ public class GuiManager {
     public static void saveShow(Long filmId, String roomName, String startDate, String startTime) {
       
       if(Validator.validateShow(filmId, roomName, startDate, startTime, screen)){
-        
-      }
-      else{
         service.saveShow(filmId, roomName, LocalDate.parse(startDate), LocalTime.parse(startTime));
         screen.refreshListOfFilmAndShowPanel();
       }
