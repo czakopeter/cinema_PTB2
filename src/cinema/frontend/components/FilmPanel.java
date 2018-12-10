@@ -55,25 +55,28 @@ public class FilmPanel extends JPanel {
       listFilmTableId.add(Long.toString(film.getFilmId()));
       dtm.addRow(displayedFilmData(film));
     }
-    
     filmTable.setModel(dtm);
   }
   
   private Object[] displayedFilmData(Film film) {
-    int soldTicket = 0;
-    for(Seats seat : GuiManager.getSeatsByFilm(film.getFilmId())) {
-      soldTicket+=seat.getSoldTicket();
-    }
+    
       Object[] array = {
         film.getTitle(),
         film.getSynconized().name(),
         Integer.toString(film.getRuntime()),
         film.getAgeLimit(),
-        Integer.toString(soldTicket)
+        Integer.toString(getSoldTicketForFilm(film.getFilmId()))
       };
       return array;
   }
   
+  private int getSoldTicketForFilm(Long filmId) {
+    int soldTicket = 0;
+    for(Seats seat : GuiManager.getSeatsByFilm(filmId)) {
+      soldTicket+=seat.getSoldTicket();
+    }
+    return soldTicket;
+  }
 
   private void newSelection(ListSelectionEvent event) {
     if(event.getValueIsAdjusting()) {
