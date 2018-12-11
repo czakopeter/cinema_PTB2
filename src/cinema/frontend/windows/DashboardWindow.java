@@ -46,22 +46,26 @@ public class DashboardWindow extends JFrame {
     tabbedPane.setSelectedIndex(tabbedPane.getTabCount()-1);
   }
   
-  public void addEditShowPanelToTabbedPanel(String showId) {
+  public void addEditShowPanelToTabbedPanel(Long showId) {
     EditShowPanel nsp = new EditShowPanel(tabbedPane, showId);
     tabbedPane.addTab("Add show", nsp);
     tabbedPane.setEnabled(false);
     tabbedPane.setSelectedIndex(tabbedPane.getTabCount()-1);
   }
 
-  public void addBookingPanelToTabbedPanel(String showId) {
+  public void addBookingPanelToTabbedPanel(Long showId) {
     BookingPanel bp = new BookingPanel(tabbedPane, showId);
     tabbedPane.addTab("Booking tab", bp);
     tabbedPane.setEnabled(false);
     tabbedPane.setSelectedIndex(tabbedPane.getTabCount()-1);
   }
-  
-  public void refreshListOfFilmAndShowPanel() {
-    showListPanel.refreshTable();
-    filmListPanel.refreshTable();
+
+  public void refreshListOfFilmAndShowPanel(Long showId, Long filmId) {
+    showListPanel.refreshTable(showId);
+    filmListPanel.refreshTable(filmId);
+  }
+
+  public void refreshListOfShow(Long showId) {
+    showListPanel.refreshTable(showId);
   }
 }

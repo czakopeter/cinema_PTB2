@@ -139,4 +139,16 @@ public class JDBCSeatDao implements SeatDao {
     
     return statement;
   }
+
+  @Override
+  public void deleteByShowId(Long key) {
+    String sql = "DELETE FROM \"USERNAME\".\"seats\" WHERE showId = ?";
+    
+    try (PreparedStatement statement = con.prepareStatement(sql)) {
+      statement.setLong(1, key);
+      statement.executeUpdate();
+    } catch (SQLException ex) {
+        Logger.getLogger(JDBCShowDao.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  }
 }

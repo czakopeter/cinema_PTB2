@@ -48,7 +48,7 @@ public class DaoService implements Service {
   }
 
   @Override
-  public Show getShow(String showId) {
+  public Show getShow(Long showId) {
     return dm.getShow(showId);
   }
 
@@ -81,7 +81,7 @@ public class DaoService implements Service {
   }
 
   @Override
-  public void saveShow(Long filmId, String roomName, LocalDate startDate, LocalTime startTime) {
+  public Long saveShow(Long filmId, String roomName, LocalDate startDate, LocalTime startTime) {
     Show show = new Show();
     show.setFilmId(filmId);
     show.setRoomName(roomName);
@@ -89,12 +89,13 @@ public class DaoService implements Service {
     show.setStartTime(startTime);
     show = dm.saveShow(show);
     saveSeats(show);
+    return show.getShowId();
   }
 
   @Override
   public void updateShow(Long showId, Long filmId, String roomName, LocalDate startDate, LocalTime startTime) {
     System.out.println("Just update");
-    Show show = getShow(Long.toString(showId));
+    Show show = getShow(showId);
     show.setFilmId(filmId);
     show.setStartDate(startDate);
     show.setStartTime(startTime);
@@ -118,5 +119,10 @@ public class DaoService implements Service {
     seat.setRoomName(roomName);
     seat.setSeatsStatus(seatStatus);
     modifySeatsStatus(seat);
+  }
+
+  @Override
+  public void deleteShow(Long showId) {
+    dm.deleteShow(showId);
   }
 }

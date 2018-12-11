@@ -1,6 +1,7 @@
 package cinema.frontend.components;
 
 import cinema.backend.entities.Film;
+import cinema.backend.entities.Seats;
 import cinema.backend.entities.Show;
 import cinema.frontend.GuiManager;
 import cinema.frontend.components.factory.SwingComponentFactory;
@@ -8,6 +9,8 @@ import cinema.frontend.windows.DashboardWindow;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
@@ -26,7 +29,7 @@ import javax.swing.table.DefaultTableModel;
 public class ShowPanel extends JPanel{
   private final static Object[] SHOW_COLUMN_NAMES = new Object[]{"Datetime", "Title", "Room", "Available seat"};
   private static List<Long> listFilmFilterId;
-  private static List<String> listShowTableId;
+  private static List<Long> listShowTableId;
   
   private final DashboardWindow screen;
   private JTable showTable;
@@ -84,7 +87,7 @@ public class ShowPanel extends JPanel{
     showTable.removeAll();
     DefaultTableModel dtm = new DefaultTableModel(SHOW_COLUMN_NAMES, 0);
     for(Show show : content) {
-      listShowTableId.add(Long.toString(show.getShowId()));
+      listShowTableId.add(show.getShowId());
       dtm.addRow(displayedShowData(show));
     }
     showTable.setModel(dtm);
@@ -92,9 +95,20 @@ public class ShowPanel extends JPanel{
   
   private void newSelection(ListSelectionEvent event) {
     if(event.getValueIsAdjusting()) {
-      bookButton.setEnabled(true);
-      modifyShowButton.setEnabled(true);
-      deleteShowButton.setEnabled(true);
+      Show show = GuiManager.getShow(listShowTableId.get(showTable.getSelectedRow()));
+      if(0 > LocalDate.now().compareTo(show.getStartDate()) ||
+          (0 == LocalDate.now().compareTo(show.getStartDate()) && 
+           0 > LocalTime.now().compareTo(show.getStartTime()))) {
+        bookButton.setEnabled(true);
+        modifyShowButton.setEnabled(true);
+        deleteShowButton.setEnabled(true);
+      }
+      else
+      {
+        bookButton.setEnabled(false);
+        modifyShowButton.setEnabled(false);
+        deleteShowButton.setEnabled(false);
+      }
     }
   }
   
@@ -141,8 +155,7 @@ public class ShowPanel extends JPanel{
   }
   
   private void deleteShow(ActionEvent event) {
-//    popup ablak
-//    GuiManager.deleteShow(showTable.getValueAt(showTable.getSelectedRow(), 0).toString());
+    GuiManager.deleteShow(listShowTableId.get(showTable.getSelectedRow()));
   }
   
   private void filmFilterSelect(ActionEvent event) {
@@ -164,8 +177,27 @@ public class ShowPanel extends JPanel{
     roomComboBox.setSelectedIndex(-1);
     refreshTable();
   }
-  
-  public void refreshTable() {
+
+  public void refreshTable(Long showId) {
+    Seats seat = GuiManager.getSeatsByShow(showId);
+    if(seat == null) {
+      int row = listShowTableId.indexOf(showId);
+      listShowTableId.remove(showId);
+      showTable.remove(row);
+    }
+    else if(listShowTableId.contains(showId)) {
+      int row = listShowTableId.indexOf(Long.toString(showId));
+      showTable.setValueAt(seat.getEmptySeat(), row, showTable.getColumnCount()-1);
+    }
+    else {
+      Show show = GuiManager.getShow(showId);
+      listShowTableId.add(show.getShowId());
+      DefaultTableModel dtm = (DefaultTableModel) showTable.getModel();
+      dtm.addRow(displayedShowData(show));
+    }
+  }
+
+  private void refreshTable() {
     addContentToTable(GuiManager.listAllShows());
   }
 }

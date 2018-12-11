@@ -29,17 +29,14 @@ public class GuiManager {
     
   
     public static Film getFilm(String filmId) {
-      //validate this is long
       return service.getFilm(Long.valueOf(filmId));
     }
     
     public static Film getFilm(Long filmId) {
-      //validate this is long
       return service.getFilm(filmId);
     }
     
-    public static Show getShow(String showId) {
-      ////validate this is long
+    public static Show getShow(Long showId) {
       return service.getShow(showId);
     }
     
@@ -56,20 +53,22 @@ public class GuiManager {
     }
     
     public static void saveShow(Long filmId, String roomName, String startDate, String startTime) {
-      
       if(Validator.validateShow(filmId, roomName, startDate, startTime, screen)){
-        service.saveShow(filmId, roomName, LocalDate.parse(startDate), LocalTime.parse(startTime));
-        screen.refreshListOfFilmAndShowPanel();
+        Long showId = service.saveShow(filmId, roomName, LocalDate.parse(startDate), LocalTime.parse(startTime));
+        screen.refreshListOfShow(showId);
       }
     }
     
-    public static void updateShow(long showId, Long filmId, String roomName, String startDate, String startTime) {
+    public static void updateShow(Long showId, Long filmId, String roomName, String startDate, String startTime) {
       service.updateShow(showId, filmId, roomName, LocalDate.parse(startDate), LocalTime.parse(startTime));
-      screen.refreshListOfFilmAndShowPanel();
+      screen.refreshListOfFilmAndShowPanel(showId, filmId);
     }
     
     public static void deleteShow(Long showId) {
-        
+      if(GuiManager.getSeatsByShow(showId).getSoldTicket() == 0) {
+        service.deleteShow(showId);
+      }
+      screen.refreshListOfShow(showId);
     }
     
     public static List<Show> listShowsByFilmId(Long filmId) {
@@ -81,8 +80,8 @@ public class GuiManager {
     }
     
     public static void modifyBooking(Seats seats) {
-      service.modifySeatsStatus(seats);
-      screen.refreshListOfFilmAndShowPanel();
+      service.modifySeatsStatus(seats);  
+      screen.refreshListOfFilmAndShowPanel(seats.getShowId(), getShow(seats.getShowId()).getFilmId());
     }
 
   public static Room getRoom(String roomName) {

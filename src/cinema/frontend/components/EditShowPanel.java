@@ -36,7 +36,7 @@ public class EditShowPanel extends JPanel{
     initNewShowPanel();
   }
   
-  public EditShowPanel(JTabbedPane tp, String showId) {
+  public EditShowPanel(JTabbedPane tp, Long showId) {
     tabbedPane = tp;
     initNewShowPanel();
     show = GuiManager.getShow(showId);

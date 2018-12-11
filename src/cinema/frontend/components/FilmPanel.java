@@ -89,8 +89,11 @@ public class FilmPanel extends JPanel {
     add(detailsPanel, BorderLayout.SOUTH); 
     detailsPanel.seDetailsPanelWithtFilm(listFilmTableId.get(0));
   }
-
-  public void refreshTable() {
-    addContentToTable(GuiManager.listAllFilms());
+  
+  public void refreshTable(Long filmId) {
+    filmTable.setValueAt(
+            getSoldTicketForFilm(filmId), 
+            listFilmTableId.indexOf(Long.toString(filmId)), 
+            filmTable.getColumnCount()-1);
   }
 }

@@ -26,7 +26,7 @@ public interface Service {
 
   public List<Show> listShowsByRoom(String roomName);
 
-  public Show getShow(String showId);
+  public Show getShow(Long showId);
 
   public Room getRoom(String roomName);
 
@@ -34,7 +34,9 @@ public interface Service {
 
   public void modifySeatsStatus(Seats seats);
 
-  public void saveShow(Long filmId, String roomName, LocalDate startDate, LocalTime startTime);
+  public Long saveShow(Long filmId, String roomName, LocalDate startDate, LocalTime startTime);
 
   public void updateShow(Long showId, Long filmId, String roomName, LocalDate startDate, LocalTime startTime);
+
+  public void deleteShow(Long showId);
 }

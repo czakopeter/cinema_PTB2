@@ -99,10 +99,10 @@ public class DaoManager {
     return shows;
   }
   
-  public Show getShow(String showId) {
+  public Show getShow(Long showId) {
     open();
     showDao.setCon(con);
-    Show show = showDao.findById(Long.valueOf(showId));
+    Show show = showDao.findById(showId);
     close();
     return show;
   }
@@ -133,6 +133,21 @@ public class DaoManager {
     open();
     seatDao.setCon(con);
     seatDao.save(seat);
+    close();
+  }
+  
+  public void deleteShow(Long showId) {
+    deleteSeatByShowId(showId);
+    open();
+    showDao.setCon(con);
+    showDao.delete(showId);
+    close();
+  }
+  
+  private void deleteSeatByShowId(Long showId) {
+    open();
+    seatDao.setCon(con);
+    seatDao.deleteByShowId(showId);
     close();
   }
   

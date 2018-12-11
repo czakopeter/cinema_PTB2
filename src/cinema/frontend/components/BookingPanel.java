@@ -30,9 +30,9 @@ public class BookingPanel extends JPanel {
   private final Seats seats;
   private int rowLength;
   
-  public BookingPanel(JTabbedPane tp, String filmId) {
+  public BookingPanel(JTabbedPane tp, Long filmId) {
     tabbedPane = tp;
-    this.seats = GuiManager.getSeatsByShow(Long.valueOf(filmId));
+    this.seats = GuiManager.getSeatsByShow(filmId);
     System.out.println(seats);
     initBookingpanel();
   }
@@ -59,7 +59,7 @@ public class BookingPanel extends JPanel {
   }
   
   private String getInfo() {
-    Show show = GuiManager.getShow(Long.toString(seats.getShowId()));
+    Show show = GuiManager.getShow(seats.getShowId());
     return GuiManager.getFilm(Long.toString(show.getFilmId())).getTitle() +
            "    " + show.getStartDate().toString() + 
            " " + show.getStartTime().toString();
@@ -97,7 +97,6 @@ public class BookingPanel extends JPanel {
   private void changeStatus(ActionEvent event) {
     SeatButton sb = (SeatButton)event.getSource();
     sb.setBackground(sb.changeStatus());
-    System.out.println(sb.getRow()*rowLength + sb.getColumn());
   }
 
   private void initButtonsPanel() {

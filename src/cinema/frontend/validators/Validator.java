@@ -42,7 +42,7 @@ public class Validator {
       JOptionPane.showMessageDialog(frame, "Aktualis datumnal nem lehet regebben");
       return false;
     }
-    if(0 < LocalTime.now().toString().compareTo(startDate)) {
+    if(0 == LocalDate.now().toString().compareTo(startDate) && 0 < LocalTime.now().toString().compareTo(startTime)) {
       JOptionPane.showMessageDialog(frame, "Aktualis idopontnal nem lehet regebben");
       return false;
     }
