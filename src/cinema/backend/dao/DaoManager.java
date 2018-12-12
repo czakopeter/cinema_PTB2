@@ -7,6 +7,7 @@ import cinema.backend.entities.Show;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -149,6 +150,22 @@ public class DaoManager {
     seatDao.setCon(con);
     seatDao.deleteByShowId(showId);
     close();
+  }
+  
+  public List<Show> listShowsByFilmIdAtDate(Long filmId, LocalDate date) {
+    open();
+    showDao.setCon(con);
+    List<Show> shows = showDao.listShowsByFilmIdAtDate(filmId, date);
+    close();
+    return shows;
+  }
+
+  public List<Show> listShowsByRoomAtDate(String roomName, LocalDate date) {
+    open();
+    showDao.setCon(con);
+    List<Show> shows = showDao.listShowsByRoomAtDate(roomName, date);
+    close();
+    return shows;
   }
   
   private void open() {

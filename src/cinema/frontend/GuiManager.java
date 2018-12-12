@@ -98,4 +98,12 @@ public class GuiManager {
     shows.forEach(show -> seats.add(getSeatsByShow(show.getShowId())));
     return seats;
   }
+
+  public static List<Show> listShowsByFilmIdAtDate(Long filmId, String startDate) {
+    return service.listShowsByFilmIdAtDate(filmId, LocalDate.parse(startDate));
+  }
+  
+  public static List<Show> listShowsByRoomAtDate(String roomName, String startDate) {
+    return service.listShowsByRoomAtDate(roomName, LocalDate.parse(startDate));
+  }
 }

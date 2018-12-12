@@ -125,4 +125,14 @@ public class DaoService implements Service {
   public void deleteShow(Long showId) {
     dm.deleteShow(showId);
   }
+
+  @Override
+  public List<Show> listShowsByFilmIdAtDate(Long filmId, LocalDate date) {
+    return dm.listShowsByFilmIdAtDate(filmId, date);
+  }
+
+  @Override
+  public List<Show> listShowsByRoomAtDate(String roomName, LocalDate date) {
+    return dm.listShowsByRoomAtDate(roomName, date);
+  }
 }

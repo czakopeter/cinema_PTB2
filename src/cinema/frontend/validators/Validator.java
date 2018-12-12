@@ -2,6 +2,7 @@ package cinema.frontend.validators;
 
 import cinema.backend.entities.Show;
 import cinema.frontend.GuiManager;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.regex.Pattern;
@@ -38,12 +39,22 @@ public class Validator {
       JOptionPane.showMessageDialog(frame, "Ido fomatum: 10:10");
       return false;
     }
-    if(0 < LocalDate.now().toString().compareTo(startDate)) {
-      JOptionPane.showMessageDialog(frame, "Aktualis datumnal nem lehet regebben");
+    LocalDate date;
+    LocalTime time;
+    try{
+      date = LocalDate.parse(startDate);
+      time = LocalTime.parse(startTime);
+    } catch(DateTimeException e) {
+      JOptionPane.showMessageDialog(frame, "Nem megfelelo a datum vagy az ido erteke\n datum: " +
+              startDate + ", ido: " + startTime);
       return false;
     }
-    if(0 == LocalDate.now().toString().compareTo(startDate) && 0 < LocalTime.now().toString().compareTo(startTime)) {
-      JOptionPane.showMessageDialog(frame, "Aktualis idopontnal nem lehet regebben");
+    if(LocalDate.now().isAfter(date)) {
+      JOptionPane.showMessageDialog(frame, "Aktualis datumnal (" + LocalDate.now() + ") nem lehet regebben\n");
+      return false;
+    }
+    if(LocalDate.now().equals(date) && LocalTime.now().isAfter(time)) {
+      JOptionPane.showMessageDialog(frame, "Aktualis idopontnal (" + LocalTime.now() + ") nem lehet regebben");
       return false;
     }
     
@@ -58,21 +69,28 @@ public class Validator {
     }
     
     int runtime = GuiManager.getFilm(filmId).getRuntime();
+    
+    for(Show show : GuiManager.listShowsByRoomAtDate(roomName, startDate))
+    {
+      if((time.isAfter(show.getStartTime()) && time.isBefore(show.getStartTime().plusMinutes(runtime+30))) ||
+         (time.plusMinutes(runtime+30).isAfter(show.getStartTime()) && time.plusMinutes(runtime).isBefore(show.getStartTime().plusMinutes(runtime)))){
+        JOptionPane.showMessageDialog(frame, "Mar van masik eloadas ebben a teremben, ebben az idopontban");
+        return false;
+      }
+    }
+    
     int counter = 0;
-    for(Show show : GuiManager.listShowsByFilmId(filmId)){
-      if(show.getStartDate().equals(LocalDate.parse(startDate)) &&
-        ((LocalTime.parse(startTime).isAfter(show.getStartTime()) &&
-          LocalTime.parse(startTime).isBefore(show.getStartTime().plusMinutes(runtime))) ||
-         (LocalTime.parse(startTime).plusMinutes(runtime).isAfter(show.getStartTime()) &&
-          LocalTime.parse(startTime).plusMinutes(runtime).isBefore(show.getStartTime().plusMinutes(runtime)))))
+    for(Show show : GuiManager.listShowsByFilmIdAtDate(filmId, startDate)){
+      if((time.isAfter(show.getStartTime()) && time.isBefore(show.getStartTime().plusMinutes(runtime))) ||
+         (time.plusMinutes(runtime).isAfter(show.getStartTime()) && time.plusMinutes(runtime).isBefore(show.getStartTime().plusMinutes(runtime))))
       {
         ++counter;
         if(counter == 3) {
+          JOptionPane.showMessageDialog(frame, "Ezt a filmet ebben az idopontban mar 3 teremben jatszak");
           return false;
         }
       }
     }
     return true;
   }
-  
 }

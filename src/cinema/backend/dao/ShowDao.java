@@ -1,6 +1,7 @@
 package cinema.backend.dao;
 
 import cinema.backend.entities.Show;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -18,4 +19,8 @@ public interface ShowDao extends CRUDDao<Show, Long>{
   public void update(Show show);
   
   public void delete(long key);
+
+  public List<Show> listShowsByFilmIdAtDate(Long filmId, LocalDate date);
+
+  public List<Show> listShowsByRoomAtDate(String roomName, LocalDate date);
 }

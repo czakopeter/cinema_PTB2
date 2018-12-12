@@ -39,4 +39,8 @@ public interface Service {
   public void updateShow(Long showId, Long filmId, String roomName, LocalDate startDate, LocalTime startTime);
 
   public void deleteShow(Long showId);
+
+  public List<Show> listShowsByFilmIdAtDate(Long filmId, LocalDate parse);
+
+  public List<Show> listShowsByRoomAtDate(String roomName, LocalDate parse);
 }

@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -190,5 +191,59 @@ public class JDBCShowDao implements ShowDao {
     statement.setLong(5, show.getShowId());
     
     return statement;
+  }
+
+  @Override
+  public List<Show> listShowsByFilmIdAtDate(Long filmId, LocalDate date) {
+    String sql = "SELECT * FROM \"USERNAME\".\"show\" WHERE filmId = ? and startDate = ?";
+        try (PreparedStatement statement = createPreparedStatement(con, sql, filmId, date);
+        ResultSet resultSet = statement.executeQuery();) {
+
+        List<Show> result = new LinkedList<>();
+        while (resultSet.next()) {
+            result.add(setShow(resultSet));
+        }
+        return result;
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(JDBCShowDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+  }
+
+  @Override
+  public List<Show> listShowsByRoomAtDate(String roomName, LocalDate date) {
+    String sql = "SELECT * FROM \"USERNAME\".\"show\" WHERE roomName = ? and startDate = ?";
+        try (PreparedStatement statement = createPreparedStatement(con, sql, roomName, date);
+        ResultSet resultSet = statement.executeQuery();) {
+
+        List<Show> result = new LinkedList<>();
+        while (resultSet.next()) {
+            result.add(setShow(resultSet));
+        }
+        return result;
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(JDBCShowDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+  }
+  
+  private PreparedStatement createPreparedStatement(Connection con, String sql, String key, LocalDate date) throws SQLException {
+  PreparedStatement statement = con.prepareStatement(sql);
+
+  statement.setString(1, key);
+  statement.setDate(2, Date.valueOf(date));
+
+  return statement;
+  }
+  
+  private PreparedStatement createPreparedStatement(Connection con, String sql, Long key, LocalDate date) throws SQLException {
+  PreparedStatement statement = con.prepareStatement(sql);
+
+  statement.setLong(1, key);
+  statement.setDate(2, Date.valueOf(date));
+
+  return statement;
   }
 }
