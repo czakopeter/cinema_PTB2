@@ -15,7 +15,11 @@ import java.util.List;
  */
 public class DaoService implements Service {
   
-  private DaoManager dm = new DaoManager();
+  private DaoManager dm;
+
+  public DaoService(DaoManager dm) {
+    this.dm = dm;
+  }
 
   @Override
   public List<Film> listAllFilms() {

@@ -1,5 +1,6 @@
 package cinema.frontend;
 
+import cinema.backend.dao.DaoManager;
 import cinema.backend.entities.Film;
 import cinema.backend.entities.Room;
 import cinema.backend.entities.Seats;
@@ -19,7 +20,7 @@ import java.util.List;
  */
 public class GuiManager {
     private static DashboardWindow screen;
-    private static final Service service = new DaoService();
+    private static final Service service = new DaoService(new DaoManager());
     
     public static void start() {
         screen = new DashboardWindow();
