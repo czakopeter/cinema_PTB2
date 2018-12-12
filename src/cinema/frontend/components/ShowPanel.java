@@ -86,7 +86,9 @@ public class ShowPanel extends JPanel{
     listShowTableId.clear();
     showTable.removeAll();
     DefaultTableModel dtm = new DefaultTableModel(SHOW_COLUMN_NAMES, 0);
+    
     for(Show show : content) {
+      System.out.println(show.getShowId());
       listShowTableId.add(show.getShowId());
       dtm.addRow(displayedShowData(show));
     }
@@ -186,7 +188,7 @@ public class ShowPanel extends JPanel{
       showTable.remove(row);
     }
     else if(listShowTableId.contains(showId)) {
-      int row = listShowTableId.indexOf(Long.toString(showId));
+      int row = listShowTableId.indexOf(showId);
       showTable.setValueAt(seat.getEmptySeat(), row, showTable.getColumnCount()-1);
     }
     else {
