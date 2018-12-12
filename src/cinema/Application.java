@@ -1,6 +1,5 @@
 package cinema;
 
-//import hu.elte.progtech2.frontend.GuiManager;
 import cinema.frontend.GuiManager;
 import java.io.File;
 import java.io.FileInputStream;

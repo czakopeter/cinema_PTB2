@@ -125,39 +125,93 @@ INSERT INTO "USERNAME"."room" (roomName, rowNr, columnNr) VALUES
 INSERT INTO "USERNAME"."show" (filmId, roomName, startDate, startTime) VALUES
 	(3,
 	'Batcave',
-	'2018-11-12',
+	'2018-12-12',
 	'17:00'
 	),
 	(1,
 	'Batcave',
-	'2018-11-12',
+	'2018-12-12',
 	'18:30'
 	),
 	(3,
 	'Stargate',
-	'2018-11-12',
+	'2018-12-12',
 	'21:00'
 	),
 	(4,
 	'Stargate',
-	'2018-11-12',
+	'2018-12-12',
 	'18:00'
+	),
+	(5,
+	'Terminator',
+	'2018-12-12',
+	'14:30'
+	),
+	(10,
+	'Terminator',
+	'2018-12-12',
+	'17:30'
+	),
+	(7,
+	'Terminator',
+	'2018-12-12',
+	'19:30'
+	),
+	(6,
+	'Terminator',
+	'2018-12-12',
+	'21:45'
+	),
+	(5,
+	'Terminator',
+	'2018-12-13',
+	'16:00'
+	),
+	(4,
+	'Terminator',
+	'2018-12-13',
+	'18:20'
 	);
 
 INSERT INTO "USERNAME"."seats" (showId, roomName, seatsStatus) VALUES
 	(1,
 	'Batcave',
-	'AAAAOOOOAAAA'
+	'AAAAAAAAAAAA'
 	),
 	(2,
 	'Batcave',
-	'OOOOAAAAOOOO'
+	'AAAAAAAAAAAA'
 	),
 	(3,
 	'Stargate',
-	'OOOAAAOOOAAA'
+	'AAAAAAAAAAAA'
 	),
 	(4,
 	'Stargate',
 	'AAAAAAAAAAAA'
+	),
+	(5,
+	'Terminator',
+	'AAAAAAAAA'
+	),
+	(6,
+	'Terminator',
+	'AAAAAAAAA'
+	),
+	(7,
+	'Terminator',
+	'AAAAAAAAA'
+	),
+	(8,
+	'Terminator',
+	'AAAAAAAAA'
+	),
+	(9,
+	'Terminator',
+	'AAAAAAAAA'
+	),
+	(10,
+	'Terminator',
+	'AAAAAAAAA'
 	);
