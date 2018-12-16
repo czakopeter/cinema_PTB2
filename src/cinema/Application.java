@@ -28,9 +28,17 @@ public class Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception{
-//      initDB();
+      if(!databaseExist()) {
+        initDB();
+      }
       GuiManager.start();
     }
+    
+    private static boolean databaseExist() {
+      //check database
+      return true;
+    }
+      
         private static void initDB() throws Exception {
         openConnection();
         executeScript();
